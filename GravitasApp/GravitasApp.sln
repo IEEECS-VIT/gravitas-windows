@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GravitasApp", "GravitasApp\GravitasApp.csproj", "{267A43A3-AC37-4307-99C8-2742B13BFDCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModel", "DataModel\DataModel.csproj", "{E6810160-DD20-4A77-9A41-0122661353B3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{267A43A3-AC37-4307-99C8-2742B13BFDCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{267A43A3-AC37-4307-99C8-2742B13BFDCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{267A43A3-AC37-4307-99C8-2742B13BFDCC}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{267A43A3-AC37-4307-99C8-2742B13BFDCC}.Debug|ARM.ActiveCfg = Debug|ARM
+		{267A43A3-AC37-4307-99C8-2742B13BFDCC}.Debug|ARM.Build.0 = Debug|ARM
+		{267A43A3-AC37-4307-99C8-2742B13BFDCC}.Debug|ARM.Deploy.0 = Debug|ARM
+		{267A43A3-AC37-4307-99C8-2742B13BFDCC}.Debug|x86.ActiveCfg = Debug|x86
+		{267A43A3-AC37-4307-99C8-2742B13BFDCC}.Debug|x86.Build.0 = Debug|x86
+		{267A43A3-AC37-4307-99C8-2742B13BFDCC}.Debug|x86.Deploy.0 = Debug|x86
+		{267A43A3-AC37-4307-99C8-2742B13BFDCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{267A43A3-AC37-4307-99C8-2742B13BFDCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{267A43A3-AC37-4307-99C8-2742B13BFDCC}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{267A43A3-AC37-4307-99C8-2742B13BFDCC}.Release|ARM.ActiveCfg = Release|ARM
+		{267A43A3-AC37-4307-99C8-2742B13BFDCC}.Release|ARM.Build.0 = Release|ARM
+		{267A43A3-AC37-4307-99C8-2742B13BFDCC}.Release|ARM.Deploy.0 = Release|ARM
+		{267A43A3-AC37-4307-99C8-2742B13BFDCC}.Release|x86.ActiveCfg = Release|x86
+		{267A43A3-AC37-4307-99C8-2742B13BFDCC}.Release|x86.Build.0 = Release|x86
+		{267A43A3-AC37-4307-99C8-2742B13BFDCC}.Release|x86.Deploy.0 = Release|x86
+		{E6810160-DD20-4A77-9A41-0122661353B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6810160-DD20-4A77-9A41-0122661353B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6810160-DD20-4A77-9A41-0122661353B3}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{E6810160-DD20-4A77-9A41-0122661353B3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E6810160-DD20-4A77-9A41-0122661353B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6810160-DD20-4A77-9A41-0122661353B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6810160-DD20-4A77-9A41-0122661353B3}.Release|ARM.ActiveCfg = Release|Any CPU
+		{E6810160-DD20-4A77-9A41-0122661353B3}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
