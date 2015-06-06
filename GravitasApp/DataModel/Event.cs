@@ -7,19 +7,18 @@ namespace DataModel
 {
     public class Event
     {
-            public string name { get; set; }
-            public string category { get; set; }
-            public string coordinator1Name { get; set; }
-            public string coordinator2Name { get; set; }
-            public long coordinator1Phone { get; set; }
-            public long coordinator2Phone { get; set; }
-            public string description { get; set; }
-            public int fees { get; set; }
-            public string venue { get; set; }
-            public int prize1 { get; set; }
-            public int prize2 { get; set; }
-            public int prize3 { get; set; }
-            public string duration { get; set; }
-            public string miscDetails { get; set; }
+            public string EventName { get; set; }
+            public string EventCategory { get; set; }
+            public string Coordinator1Name { get; set; }
+            public string Coordinator2Name { get; set; }
+            public string Coordinator1Phone { get; set; }
+            public string Coordinator2Phone { get; set; }
+            public string Description { get; set; }
+            public int RegistrationFees { get; set; }
+            public string EventVenue { get; set; }
+            public int[] Prize { get; set; }
+            public DateTimeOffset EventStartTime { get; set; }
+            public DateTimeOffset EventEndTime { get; set; }
+            public string MiscDetails { get; set; }
     }
 }
