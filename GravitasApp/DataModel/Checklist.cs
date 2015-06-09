@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,10 +10,13 @@ using System.Threading.Tasks;
 namespace DataModel
 {
 
+    [DataContract]
     public class ChecklistItem<T> : IEquatable<ChecklistItem<T>>
         where T : IEquatable<T>
     {
+        [DataMember]
         private readonly T _content;
+        [DataMember]
         private bool _isChecked;
 
         public T Content
@@ -48,6 +52,7 @@ namespace DataModel
         }
     }
 
+    [CollectionDataContract]
     public class Checklist<T> : KeyedCollection<T, ChecklistItem<T>>
         where T : IEquatable<T>
     {

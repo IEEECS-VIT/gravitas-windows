@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace DataModel
 {
     public interface IFilter<T>
@@ -20,6 +21,8 @@ namespace DataModel
         where TCriterion : IEquatable<TCriterion>
     {
 
+        #region Fields and Properties
+
         private readonly Func<TSource, TCriterion> _filteringPropertySelector;
 
         private Checklist<TCriterion> _checklist;
@@ -30,13 +33,19 @@ namespace DataModel
             get { return _checklistView; }
         }
 
+        #endregion
+
+        #region Constructor
+
         public FilterCriterion(Func<TSource, TCriterion> filteringPropertySelector)
         {
+            _filteringPropertySelector = filteringPropertySelector;
+            
             _checklist = new Checklist<TCriterion>();
             _checklistView = new ReadOnlyCollection<ChecklistItem<TCriterion>>(_checklist);
-
-            _filteringPropertySelector = filteringPropertySelector;
         }
+
+        #endregion
 
         #region IFilter<> Interface Implementation
 
@@ -57,18 +66,18 @@ namespace DataModel
 
         public void GenerateCheckList(IEnumerable<TSource> items)
         {
-            var uniquePropertiesList = GetDistinctValues(items);
-
-            _checklist.Clear();
-            foreach (TCriterion value in uniquePropertiesList)
-                _checklist.Add(new ChecklistItem<TCriterion>(value));
-
-            _checklist.OrderBy<ChecklistItem<TCriterion>, TCriterion>((checkListItem) => checkListItem.Content);
+            PopulateChecklistFresh(GetChecklist(items));
         }
 
         public void RunMaintenance(IEnumerable<TSource> items)
         {
-            throw new NotImplementedException();
+            var newChecklist = GetChecklist(items);
+
+            foreach (var item in Checklist)
+                if (newChecklist.Contains(item.Content))
+                    newChecklist[item.Content].IsChecked = item.IsChecked;
+
+            PopulateChecklistFresh(newChecklist);
         }
 
         public void ResetAllFlags()
@@ -81,11 +90,25 @@ namespace DataModel
 
         #region Private Helper Methods
 
-        private IEnumerable<TCriterion> GetDistinctValues(IEnumerable<TSource> items)
+        private Checklist<TCriterion> GetChecklist(IEnumerable<TSource> items)
         {
-            return items
-                    .Select<TSource, TCriterion>(_filteringPropertySelector)
-                    .Distinct<TCriterion>();
+            IEnumerable<TCriterion> distinctProps = items
+                                                    .Select<TSource, TCriterion>(_filteringPropertySelector)
+                                                    .Distinct<TCriterion>();
+
+            Checklist<TCriterion> checkList = new Checklist<TCriterion>();
+            foreach (TCriterion prop in distinctProps)
+                checkList.Add(new ChecklistItem<TCriterion>(prop));
+
+            checkList.OrderBy<ChecklistItem<TCriterion>, TCriterion>((checkListItem) => checkListItem.Content);
+            return checkList;
+        }
+
+        private void PopulateChecklistFresh(IEnumerable<ChecklistItem<TCriterion>> tempChecklist)
+        {
+            _checklist.Clear();
+            foreach (var item in tempChecklist)
+                _checklist.Add(item);
         }
 
         #endregion
