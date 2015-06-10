@@ -94,14 +94,14 @@ namespace DataModel
         {
             IEnumerable<TCriterion> distinctProps = items
                                                     .Select<TSource, TCriterion>(_filteringPropertySelector)
-                                                    .Distinct<TCriterion>();
+                                                    .Distinct<TCriterion>()
+                                                    .OrderBy<TCriterion, TCriterion>((item) => item);
 
-            Checklist<TCriterion> checkList = new Checklist<TCriterion>();
+            Checklist<TCriterion> checklist = new Checklist<TCriterion>();
             foreach (TCriterion prop in distinctProps)
-                checkList.Add(new ChecklistItem<TCriterion>(prop));
+                checklist.Add(new ChecklistItem<TCriterion>(prop));
 
-            checkList.OrderBy<ChecklistItem<TCriterion>, TCriterion>((checkListItem) => checkListItem.Content);
-            return checkList;
+            return checklist;
         }
 
         private void PopulateChecklistFresh(IEnumerable<ChecklistItem<TCriterion>> tempChecklist)
@@ -113,6 +113,62 @@ namespace DataModel
 
         #endregion
 
+    }
+
+    class FilterCriteria<T> : Collection<IFilter<T>>, IFilter<T>
+    {
+        #region Constructors
+
+        public FilterCriteria(IList<IFilter<T>> filterList)
+            : base(filterList)
+        { }
+
+        public FilterCriteria()
+            : base()
+        { }
+
+        #endregion
+
+        #region IFilter<> Interface Implementation
+
+        public bool CheckQualification(T content)
+        {
+            foreach (IFilter<T> criterion in this)
+                if (criterion.CheckQualification(content) == false)
+                    return false;
+                else
+                    continue;
+            return true;
+        }
+
+        public IEnumerable<T> FilterItems(IEnumerable<T> items)
+        {
+            List<T> selectedItems = new List<T>();
+            foreach (T item in items)
+                if (CheckQualification(item))
+                    selectedItems.Add(item);
+            return selectedItems;
+        }
+
+        public void GenerateCheckList(IEnumerable<T> items)
+        {
+            foreach (var criterion in this)
+                criterion.GenerateCheckList(items);
+        }
+
+        public void RunMaintenance(IEnumerable<T> items)
+        {
+            foreach (var criterion in this)
+                criterion.RunMaintenance(items);
+        }
+
+        public void ResetAllFlags()
+        {
+            foreach (var criterion in this)
+                criterion.ResetAllFlags();
+        }
+
+        #endregion
     }
 
 }

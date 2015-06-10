@@ -150,7 +150,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <None Include="TempFiles\Events.json" />
+    <Content Include="TempFiles\Events.txt" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
@@ -33,7 +34,7 @@ namespace GravitasApp.Managers
             bool result = false;
             try
             {
-                DataContractSerializer serializer = new DataContractSerializer(contentGraph.GetType(), knownTypes);
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(contentGraph.GetType(), knownTypes);
                 writeStream = await file.OpenStreamForWriteAsync();
                 serializer.WriteObject(writeStream, contentGraph);
                 result = true;
@@ -60,19 +61,19 @@ namespace GravitasApp.Managers
             }
         }
 
-        public static async Task<T> TryReadAsync<T>(StorageFile file, params Type[] knownTypes) where T : class
+        public static async Task<T> TryReadAsync<T>(StorageFile file, params Type[] knownTypes)
         {
             Stream readStream = null;
-            T content = null;
+            T content = default(T);
             try
             {
-                DataContractSerializer serializer = new DataContractSerializer(typeof(T), knownTypes);
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T), knownTypes);
                 readStream = await file.OpenStreamForReadAsync();
-                content = serializer.ReadObject(readStream) as T;
+                content = (T)serializer.ReadObject(readStream);
             }
             catch
             {
-                content = null;
+                content = default(T);
             }
             finally
             {
