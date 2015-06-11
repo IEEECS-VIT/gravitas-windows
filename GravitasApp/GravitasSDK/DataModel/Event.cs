@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using System.Text;
 
 
-namespace DataModel
+namespace GravitasSDK.DataModel
 {
     [DataContract]
     public class Event
@@ -26,7 +26,7 @@ namespace DataModel
         [DataMember]
         public string Description { get; private set; }
         [DataMember]
-        public int RegistrationFees { get; private set; }
+        public uint RegistrationFees { get; private set; }
         [DataMember]
         public string Venue { get; private set; }
         public ReadOnlyCollection<uint> Prizes { get; private set; }

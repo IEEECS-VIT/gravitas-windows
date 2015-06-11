@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace DataModel
+namespace GravitasSDK.DataModel
 {
 
     [DataContract]

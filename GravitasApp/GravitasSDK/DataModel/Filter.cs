@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace DataModel
+namespace GravitasSDK.DataModel
 {
     public interface IFilter<T>
     {
         bool CheckQualification(T content);
         IEnumerable<T> FilterItems(IEnumerable<T> items);
-        void GenerateCheckList(IEnumerable<T> items);
+        void GenerateChecklist(IEnumerable<T> items);
         void RunMaintenance(IEnumerable<T> items);
         void ResetAllFlags();
     }
@@ -32,6 +32,16 @@ namespace DataModel
         {
             get { return _checklistView; }
         }
+        
+        internal Checklist<TCriterion> InternalChecklist
+        {
+            get { return _checklist; }
+            set
+            {
+                _checklist = value;
+                _checklistView = new ReadOnlyCollection<ChecklistItem<TCriterion>>(_checklist);
+            }
+        }
 
         #endregion
 
@@ -40,7 +50,7 @@ namespace DataModel
         public FilterCriterion(Func<TSource, TCriterion> filteringPropertySelector)
         {
             _filteringPropertySelector = filteringPropertySelector;
-            
+
             _checklist = new Checklist<TCriterion>();
             _checklistView = new ReadOnlyCollection<ChecklistItem<TCriterion>>(_checklist);
         }
@@ -64,7 +74,7 @@ namespace DataModel
             return selectedItems;
         }
 
-        public void GenerateCheckList(IEnumerable<TSource> items)
+        public void GenerateChecklist(IEnumerable<TSource> items)
         {
             PopulateChecklistFresh(GetChecklist(items));
         }
@@ -112,10 +122,10 @@ namespace DataModel
         }
 
         #endregion
-
+    
     }
 
-    class FilterCriteria<T> : Collection<IFilter<T>>, IFilter<T>
+    public class FilterCriteria<T> : Collection<IFilter<T>>, IFilter<T>
     {
         #region Constructors
 
@@ -150,10 +160,10 @@ namespace DataModel
             return selectedItems;
         }
 
-        public void GenerateCheckList(IEnumerable<T> items)
+        public void GenerateChecklist(IEnumerable<T> items)
         {
             foreach (var criterion in this)
-                criterion.GenerateCheckList(items);
+                criterion.GenerateChecklist(items);
         }
 
         public void RunMaintenance(IEnumerable<T> items)
