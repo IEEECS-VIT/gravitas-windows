@@ -100,6 +100,9 @@ namespace GravitasApp
                 PageManager.NavigateTo(typeof(MainPage), null, NavigationType.FreshStart);
             }
 
+            // Temporary Set-up
+            await DataManager.LoadEventsAsync();
+
             // Ensure the current window is active
             Window.Current.Activate();
         }
