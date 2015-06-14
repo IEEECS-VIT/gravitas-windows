@@ -57,6 +57,9 @@ namespace GravitasApp
             }
 #endif
 
+            // Temporary Set-up (!)
+            await DataManager.LoadEventsAsync();
+            
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -97,11 +100,9 @@ namespace GravitasApp
                 rootFrame.Navigated += this.RootFrame_FirstNavigated;
 
                 // Navigate to the desired page.
-                PageManager.NavigateTo(typeof(MainPage), null, NavigationType.FreshStart);
+                PageManager.NavigateTo(typeof(FilterPage), null, NavigationType.FreshStart);
             }
 
-            // Temporary Set-up
-            await DataManager.LoadEventsAsync();
 
             // Ensure the current window is active
             Window.Current.Activate();

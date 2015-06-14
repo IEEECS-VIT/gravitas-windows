@@ -24,6 +24,7 @@ namespace GravitasSDK.DataModel
         #region Fields and Properties
 
         private readonly Func<TSource, TCriterion> _filteringPropertySelector;
+        private readonly string _label;
 
         private Checklist<TCriterion> _checklist;
         private ReadOnlyCollection<ChecklistItem<TCriterion>> _checklistView;
@@ -32,7 +33,11 @@ namespace GravitasSDK.DataModel
         {
             get { return _checklistView; }
         }
-        
+        public string Label
+        {
+            get { return _label; }
+        }
+
         internal Checklist<TCriterion> InternalChecklist
         {
             get { return _checklist; }
@@ -47,9 +52,10 @@ namespace GravitasSDK.DataModel
 
         #region Constructor
 
-        public FilterCriterion(Func<TSource, TCriterion> filteringPropertySelector)
+        public FilterCriterion(Func<TSource, TCriterion> filteringPropertySelector, string label = null)
         {
             _filteringPropertySelector = filteringPropertySelector;
+            _label = label;
 
             _checklist = new Checklist<TCriterion>();
             _checklistView = new ReadOnlyCollection<ChecklistItem<TCriterion>>(_checklist);
