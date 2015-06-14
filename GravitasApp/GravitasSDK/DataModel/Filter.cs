@@ -108,14 +108,13 @@ namespace GravitasSDK.DataModel
 
         private Checklist<TCriterion> GetChecklist(IEnumerable<TSource> items)
         {
-            IEnumerable<TCriterion> distinctProps = items
-                                                    .Select<TSource, TCriterion>(_filteringPropertySelector)
-                                                    .Distinct<TCriterion>()
-                                                    .OrderBy<TCriterion, TCriterion>((item) => item);
+            IEnumerable<IGrouping<TCriterion, TSource>> distinctPropertyGroups = items
+                                                    .GroupBy<TSource, TCriterion>(_filteringPropertySelector)
+                                                    .OrderBy<IGrouping<TCriterion, TSource>, TCriterion>((group) => group.Key);
 
             Checklist<TCriterion> checklist = new Checklist<TCriterion>();
-            foreach (TCriterion prop in distinctProps)
-                checklist.Add(new ChecklistItem<TCriterion>(prop));
+            foreach (IGrouping<TCriterion, TSource> propGroup in distinctPropertyGroups)
+                checklist.Add(new ChecklistItem<TCriterion>(propGroup.Key, propGroup.Count()));
 
             return checklist;
         }

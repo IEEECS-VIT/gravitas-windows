@@ -10,13 +10,13 @@
         	<Thickness x:Key="PhoneBorderThickness">2.5</Thickness>
         	<x:Double x:Key="TextStyleLargeFontSize">20</x:Double>
         	<FontFamily x:Key="PhoneFontFamilyNormal">Segoe WP</FontFamily>
-        	<Thickness x:Key="CheckBoxAndRadioButtonTextPaddingThickness">10,0,0,0</Thickness>
+        	<Thickness x:Key="CheckBoxAndRadioButtonTextPaddingThickness">13,0,0,0</Thickness>
         	<x:Double x:Key="CheckBoxAndRadioButtonMinWidthSize">168</x:Double>
         	<Thickness x:Key="PhoneTouchTargetLargeOverhang">0,16</Thickness>
         	<SolidColorBrush x:Key="CheckBoxDisabledBackgroundThemeBrush" Color="Transparent"/>
         	<Style x:Key="ChecklistItemCheckBoxStyle" TargetType="CheckBox">
         		<Setter Property="Background" Value="{ThemeResource CheckBoxBackgroundThemeBrush}"/>
-        		<Setter Property="BorderBrush" Value="{ThemeResource PhoneMidBrush}"/>
+        		<Setter Property="BorderBrush" Value="{ThemeResource PhoneLowBrush}"/>
         		<Setter Property="BorderThickness" Value="{ThemeResource PhoneBorderThickness}"/>
         		<Setter Property="FontSize" Value="{ThemeResource TextStyleLargeFontSize}"/>
         		<Setter Property="FontFamily" Value="{ThemeResource PhoneFontFamilyNormal}"/>

@@ -18,6 +18,8 @@ namespace GravitasSDK.DataModel
         private readonly T _content;
         [DataMember]
         private bool _isChecked;
+        [DataMember]
+        private readonly int _weightage;
 
         public T Content
         { get { return _content; } }
@@ -26,10 +28,21 @@ namespace GravitasSDK.DataModel
             get { return _isChecked; }
             set { _isChecked = value; }
         }
+        public int Weightage
+        {
+            get { return _weightage; }
+        }
+
+        public ChecklistItem(T content, int weightage)
+        {
+            _content = content;
+            _weightage = weightage;
+        }
 
         public ChecklistItem(T content)
         {
             _content = content;
+            _weightage = 0;
         }
 
         public bool Equals(ChecklistItem<T> other)

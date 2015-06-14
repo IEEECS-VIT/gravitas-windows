@@ -43,10 +43,29 @@
             </DataTemplate>
         </ListView.HeaderTemplate>
         
+        <ListView.ItemContainerStyle>
+            <Style TargetType="ListViewItem">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                <Setter Property="Padding" Value="3,0,3,0"></Setter>
+            </Style>
+        </ListView.ItemContainerStyle>
+        
         <ListView.ItemTemplate>
             <DataTemplate>
-                <CheckBox Content="{Binding Content, Mode=OneTime}" Style="{StaticResource ChecklistItemCheckBoxStyle}"
-                          IsChecked="{Binding IsChecked, Mode=TwoWay}"></CheckBox>
+                <CheckBox Style="{StaticResource ChecklistItemCheckBoxStyle}"
+                          IsChecked="{Binding IsChecked, Mode=TwoWay}"
+                          HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <CheckBox.Content>
+                        <Grid>
+                            <TextBlock Foreground="{ThemeResource PhoneForegroundBrush}">
+                                <Run Text="{Binding Content}"/>
+                            </TextBlock>
+                            <TextBlock Foreground="{ThemeResource PhoneMidBrush}" HorizontalAlignment="Right">
+                                (<Run Text="{Binding Weightage}"/> results)
+                            </TextBlock>
+                        </Grid>
+                    </CheckBox.Content>
+                </CheckBox>
             </DataTemplate>
         </ListView.ItemTemplate>
         
@@ -59,7 +78,7 @@
                 </GroupStyle.HeaderContainerStyle>
                 <GroupStyle.HeaderTemplate>
                     <DataTemplate>
-                        <Border Padding="3,3,0,3" BorderBrush="{ThemeResource PhoneLowBrush}"
+                        <Border Padding="3,3,0,3" BorderBrush="{ThemeResource PhoneAccentBrush}"
                                 BorderThickness="0,0,0,2.5" Margin="0,15,2,10">
                             <TextBlock Text="{Binding Label, Mode=OneTime}" Foreground="{ThemeResource PhoneAccentBrush}"
                                        FontWeight="Bold" FontSize="21"></TextBlock>
