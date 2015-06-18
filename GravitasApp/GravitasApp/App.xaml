@@ -6,6 +6,7 @@
 
     <Application.Resources>
         <ResourceDictionary>
+            
         	<SolidColorBrush x:Key="CheckBoxBackgroundThemeBrush" Color="Transparent"/>
         	<Thickness x:Key="PhoneBorderThickness">2.5</Thickness>
         	<x:Double x:Key="TextStyleLargeFontSize">20</x:Double>
@@ -121,6 +122,14 @@
         			</Setter.Value>
         		</Setter>
         	</Style>
+        
+            <x:Double x:Key="PageHeaderFontSize">37</x:Double>
+            <Style x:Key="PageHeaderTextBlockStyle" TargetType="TextBlock"
+                   BasedOn="{StaticResource SubheaderTextBlockStyle}">
+                <Setter Property="FontSize" Value="{StaticResource PageHeaderFontSize}"></Setter>
+                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            </Style>
+            
         </ResourceDictionary>
     </Application.Resources>
     

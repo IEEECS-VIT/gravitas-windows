@@ -7,6 +7,16 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition>
+                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                    <SlideNavigationTransitionInfo/>
+                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+            </NavigationThemeTransition>
+        </TransitionCollection>
+    </Page.Transitions>
+    
     <Page.Resources>
         <ResourceDictionary>
             <CollectionViewSource x:Name="FilterList" IsSourceGrouped="True"
@@ -37,8 +47,8 @@
                              VerticalAlignment="Center" HorizontalAlignment="Center">
                         <SymbolIcon Symbol="Filter"></SymbolIcon>
                     </Viewbox>
-                    <TextBlock Text="{Binding}" Style="{StaticResource SubheaderTextBlockStyle}"
-                               VerticalAlignment="Center" Grid.Column="1" FontSize="37"></TextBlock>
+                    <TextBlock Text="{Binding}" Grid.Column="1"
+                               Style="{StaticResource PageHeaderTextBlockStyle}"></TextBlock>
                 </Grid>
             </DataTemplate>
         </ListView.HeaderTemplate>

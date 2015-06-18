@@ -15,6 +15,7 @@ namespace GravitasSDK.DataModel
         void GenerateChecklist(IEnumerable<T> items);
         void RunMaintenance(IEnumerable<T> items);
         void ResetAllFlags();
+        ushort GetCheckCount();
     }
 
     public class FilterCriterion<TSource, TCriterion> : IFilter<TSource>
@@ -94,6 +95,15 @@ namespace GravitasSDK.DataModel
                     newChecklist[item.Content].IsChecked = item.IsChecked;
 
             PopulateChecklistFresh(newChecklist);
+        }
+
+        public ushort GetCheckCount()
+        {
+            ushort count = 0;
+            foreach (ChecklistItem<TCriterion> item in InternalChecklist)
+                if (item.IsChecked == true)
+                    count++;
+            return count;
         }
 
         public void ResetAllFlags()
@@ -181,6 +191,14 @@ namespace GravitasSDK.DataModel
         {
             foreach (var criterion in this)
                 criterion.ResetAllFlags();
+        }
+
+        public ushort GetCheckCount()
+        {
+            ushort count = 0;
+            foreach (var criterion in this)
+                count += criterion.GetCheckCount();
+            return count;
         }
 
         #endregion
