@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using GravitasApp.Managers;
+using Windows.UI.ViewManagement;
 
 
 namespace GravitasApp
@@ -35,6 +36,7 @@ namespace GravitasApp
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             PageManager.RegisterPage(this);
+            StatusBar.GetForCurrentView().HideAsync();
         }
 
         public Dictionary<string, object> SaveState()
