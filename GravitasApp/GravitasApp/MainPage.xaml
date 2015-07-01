@@ -9,16 +9,17 @@
     
     <Page.Resources>
         <ResourceDictionary>
+            
             <Style TargetType="HubSection">
                 <Setter Property="HeaderTemplate">
                     <Setter.Value>
                         <DataTemplate>
-                            <TextBlock Text="{Binding}"
-                                       Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
+                            <Grid Margin="0" Visibility="Collapsed"></Grid>
                         </DataTemplate>
                     </Setter.Value>
                 </Setter>
-            </Style>        
+            </Style>
+            
         </ResourceDictionary>
     </Page.Resources>
     
@@ -39,102 +40,149 @@
         
         <HubSection>
             <DataTemplate>
-                <Grid Margin="0,0,0,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="2*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Image Source="ms-appx:///Assets/Gravitas/bitsandbytes.png" Stretch="UniformToFill"></Image>
-                    
-                    <Grid Grid.Row="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                        </Grid.RowDefinitions>
-                    
-                    <StackPanel Grid.Row="0" VerticalAlignment="Top">
-                        <TextBlock Margin="0,5,0,0" FontWeight="Bold"
-                                    Style="{StaticResource MessageDialogTitleStyle}">BITS AND BYTES</TextBlock>
-                        <TextBlock Margin="0,20,0,0" Style="{StaticResource BodyTextBlockStyle}" TextAlignment="Left"> 
-                            Geek is the new cool! Compete promising participants across various domains covering programming, networking and security, algorithms and a lot more.
-                        </TextBlock>
-                        
-                    </StackPanel>
+                <StackPanel>
+                    <TextBlock Margin="0,0,0,13" Text="about" Style="{StaticResource GroupHeaderTextBlockStyle}"></TextBlock>
+                    <TextBlock Style="{StaticResource BodyTextBlockStyle}" TextAlignment="Left">
+                        graVITas '15 is an amalgam of technology and ingenuity where both come together with creativity.
+                        Come showcase your skills on one of the biggest platforms around!
+                    </TextBlock>
+                    <Grid Margin="0,20,0,13">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
 
-                        <StackPanel Grid.Row="1" VerticalAlignment="Bottom" Margin="0,0,0,13">
-                        <StackPanel Orientation="Horizontal">
-                            <SymbolIcon Symbol="Play"></SymbolIcon>
-                            <TextBlock Margin="10,0,0,0" Style="{StaticResource MessageDialogTitleStyle}"
-                                       FontWeight="Normal" Foreground="{ThemeResource PhoneAccentBrush}" Text="10 events" TextLineBounds="Tight"
-                                       VerticalAlignment="Center" LineStackingStrategy="BaselineToBaseline"></TextBlock>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Center" Margin="0,7,0,0">
-                            <SymbolIcon Symbol="Tag"></SymbolIcon>
-                            <TextBlock Margin="10,0,0,0" Style="{StaticResource MessageDialogContentStyle}"
-                                       FontWeight="Normal" Foreground="{ThemeResource PhoneMidBrush}" Text="Prizes upto 10,000 INR" TextLineBounds="Tight"
-                                       VerticalAlignment="Center" LineStackingStrategy="BaselineToBaseline"></TextBlock>
-                        </StackPanel>
-                        </StackPanel>
+                        <Grid Grid.Column="0" Margin="10" HorizontalAlignment="Left">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Viewbox Width="70" Height="70" Stretch="Uniform">
+                                <SymbolIcon Symbol="Globe" Foreground="LightGray"></SymbolIcon>
+                            </Viewbox>
+                            <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                                <TextBlock Style="{StaticResource MessageDialogTitleStyle}" TextAlignment="Center"
+                                           Text="400+" Foreground="Gold"></TextBlock>
+                                <TextBlock Style="{StaticResource MessageDialogContentStyle}" TextAlignment="Center"
+                                           Text="colleges" Foreground="Silver"></TextBlock>
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Grid.Column="1" Margin="10" HorizontalAlignment="Left">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Viewbox Width="70" Height="70" Stretch="Uniform">
+                                <SymbolIcon Symbol="Play" Foreground="LightGray"></SymbolIcon>
+                            </Viewbox>
+                            <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                                <TextBlock Style="{StaticResource MessageDialogTitleStyle}" TextAlignment="Center"
+                                           Text="150+" Foreground="Gold"></TextBlock>
+                                <TextBlock Style="{StaticResource MessageDialogContentStyle}" TextAlignment="Center"
+                                           Text="events" Foreground="Silver"></TextBlock>
+                            </StackPanel>
+                        </Grid>
                         
-                    <Button Grid.Row="2" VerticalAlignment="Bottom" Margin="0,0,0,10"
-                            Content="browse catalog"></Button>
+                        <Grid Grid.Column="2" Margin="10" HorizontalAlignment="Left">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Viewbox Width="70" Height="70" Stretch="Uniform">
+                                <SymbolIcon Symbol="Clock" Foreground="LightGray"></SymbolIcon>
+                            </Viewbox>
+                            <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                                <TextBlock Style="{StaticResource MessageDialogTitleStyle}" TextAlignment="Center"
+                                           Text="72" Foreground="Gold"></TextBlock>
+                                <TextBlock Style="{StaticResource MessageDialogContentStyle}" TextAlignment="Center"
+                                           Text="hours" Foreground="Silver"></TextBlock>
+                            </StackPanel>
+                        </Grid>
+                        
                     </Grid>
-                </Grid>
+                    
+                    <TextBlock Margin="0,7,0,10" Text="theme" Style="{StaticResource GroupHeaderTextBlockStyle}"></TextBlock>
+                    <Viewbox Stretch="Uniform" Margin="0,0,7,0">
+                        <TextBlock Text="DESIGN. CREATE. PATENT." Style="{StaticResource MessageDialogTitleStyle}"></TextBlock>
+                    </Viewbox>
+                    
+                    <Border>
+                        <Border.Transitions>
+                            <TransitionCollection>
+                                <EntranceThemeTransition FromVerticalOffset="-200"></EntranceThemeTransition>
+                            </TransitionCollection>
+                        </Border.Transitions>
+                    </Border>
+                    <TextBlock Margin="0,20,0,0" Text="{Binding SampleText, Mode=OneWay}"
+                               Style="{StaticResource MessageDialogContentStyle}">
+                    </TextBlock>
+                    
+                </StackPanel>
             </DataTemplate>
         </HubSection>
 
         <HubSection>
             <DataTemplate>
-                <Grid Margin="0,0,0,0">
+                <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="2*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Image Source="ms-appx:///Assets/Gravitas/bioxyn.png" Stretch="UniformToFill"></Image>
-
-                    <Grid Grid.Row="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                        </Grid.RowDefinitions>
-
-                        <StackPanel Grid.Row="0" VerticalAlignment="Top">
-                            <TextBlock Margin="0,5,0,0" FontWeight="Bold"
-                                    Style="{StaticResource MessageDialogTitleStyle}">BIOXYN</TextBlock>
-                            <TextBlock Margin="0,20,0,0" Style="{StaticResource BodyTextBlockStyle}" TextAlignment="Left"> 
-                            Geek is the new cool! Compete promising participants across various domains covering programming, networking and security, algorithms and a lot more.
-                            </TextBlock>
-
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="1" VerticalAlignment="Bottom" Margin="0,0,0,13">
-                            <StackPanel Orientation="Horizontal">
-                                <SymbolIcon Symbol="Play"></SymbolIcon>
-                                <TextBlock Margin="10,0,0,0" Style="{StaticResource MessageDialogTitleStyle}"
-                                       FontWeight="Normal" Foreground="{ThemeResource PhoneAccentBrush}" Text="4 events" TextLineBounds="Tight"
-                                       VerticalAlignment="Center" LineStackingStrategy="BaselineToBaseline"></TextBlock>
+                    <!--<TextBlock Style="{StaticResource GroupHeaderTextBlockStyle}"
+                               Margin="0,0,0,17" Text="event categories"></TextBlock>-->
+                    <ListView Grid.Row="1">
+                        <ListViewItem>
+                            <StackPanel Margin="0,0,10,30">
+                                <Grid>
+                                    <Image Source="ms-appx:///Assets/Gravitas/bitsandbytes.png" Height="180" Stretch="UniformToFill"></Image>
+                                </Grid>
+                                <TextBlock Margin="5,3,0,0" Text="BITS AND BYTES" Style="{StaticResource MessageDialogTitleStyle}" FontWeight="Bold"
+                                           HorizontalAlignment="Left" Foreground="SteelBlue"></TextBlock>
+                                <TextBlock Margin="5,3,0,0" Style="{StaticResource BodyTextBlockStyle}" TextAlignment="Left"> 
+                                            Geek is the new cool! Compete across various domains covering programming, networking, algorithms and many more.
+                                </TextBlock>
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Center" Margin="0,7,0,0">
-                                <SymbolIcon Symbol="Tag"></SymbolIcon>
-                                <TextBlock Margin="10,0,0,0" Style="{StaticResource MessageDialogContentStyle}"
-                                       FontWeight="Normal" Foreground="{ThemeResource PhoneMidBrush}" Text="Prizes upto 7,000 INR" TextLineBounds="Tight"
-                                       VerticalAlignment="Center" LineStackingStrategy="BaselineToBaseline"></TextBlock>
+                        </ListViewItem>
+                        <ListViewItem>
+                            <StackPanel Margin="0,0,5,30">
+                                <Grid>
+                                    <Image Source="ms-appx:///Assets/Gravitas/bioxyn.png" Height="180" Stretch="UniformToFill"></Image>
+                                </Grid>
+                                        <TextBlock Margin="5,3,0,0" Text="BIOXYN" Style="{StaticResource MessageDialogTitleStyle}" FontWeight="Bold"
+                                           HorizontalAlignment="Left" Foreground="Green"></TextBlock>
+                                        <TextBlock Margin="5,3,0,0" Style="{StaticResource BodyTextBlockStyle}" TextAlignment="Left"> 
+                                            Its the survival of the fittest, time to put those neurons to use!
+                                        </TextBlock>
                             </StackPanel>
-                        </StackPanel>
-
-                        <Button Grid.Row="2" VerticalAlignment="Bottom" Margin="0,0,0,10"
-                            Content="browse catalog"></Button>
-                    </Grid>
+                        </ListViewItem>
+                        <ListViewItem>
+                            <StackPanel Margin="0,0,5,30">
+                                <Grid>
+                                    <Image Source="ms-appx:///Assets/Gravitas/bioxyn.png" Height="180" Stretch="UniformToFill"></Image>
+                                    <Border VerticalAlignment="Bottom">
+                                        <Border.Background>
+                                            <SolidColorBrush Color="{ThemeResource ContentDialogDimmingColor}"></SolidColorBrush>
+                                        </Border.Background>
+                                        <TextBlock Margin="10,3,0,3" Text="BIOXYN" Style="{StaticResource MessageDialogTitleStyle}" FontWeight="Bold"
+                                           VerticalAlignment="Bottom" HorizontalAlignment="Left"></TextBlock>
+                                    </Border>
+                                </Grid>
+                                <TextBlock Margin="0,10,0,0" Style="{StaticResource BodyTextBlockStyle}" TextAlignment="Left"> 
+                                    Geek is the new cool! Compete promising participants across various domains covering programming, networking and security, algorithms and a lot more.
+                                </TextBlock>
+                            </StackPanel>
+                        </ListViewItem>
+                    </ListView>
                 </Grid>
             </DataTemplate>
         </HubSection>
         
         <HubSection></HubSection>
-        
-        <HubSection></HubSection>
 
     </Hub>
+
+    <!-- graVITas is organized and hosted every year by VIT University, Vellore. -->
     
 </Page>

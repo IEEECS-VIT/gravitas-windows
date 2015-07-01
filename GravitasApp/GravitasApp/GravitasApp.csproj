@@ -94,6 +94,7 @@
     <Compile Include="FilterPage.xaml.cs">
       <DependentUpon>FilterPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ViewDependencies.cs" />
     <Compile Include="IntroPage.xaml.cs">
       <DependentUpon>IntroPage.xaml</DependentUpon>
     </Compile>

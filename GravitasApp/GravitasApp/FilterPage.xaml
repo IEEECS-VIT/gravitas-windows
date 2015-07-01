@@ -27,77 +27,81 @@
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Compact">
             <AppBarButton Icon="Accept" Label="done" Click="AcceptButton_Click"></AppBarButton>
+            <AppBarButton Icon="Clear" Label="clear all" Click="ClearButton_Click"></AppBarButton>
         </CommandBar>
     </Page.BottomAppBar>
     
-    <ListView ItemsSource="{Binding Source={StaticResource FilterList}}"
-              Header="filter" Margin="19,10,19,0" SelectionMode="None">
-        
-        <ListView.HeaderTemplate>
-            <DataTemplate>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Viewbox Width="35" Height="35" Margin="0,0,7,0" 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="19,7,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Viewbox Width="35" Height="35" Margin="0,0,7,0" 
                              VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <SymbolIcon Symbol="Filter"></SymbolIcon>
-                    </Viewbox>
-                    <TextBlock Text="{Binding}" Grid.Column="1"
+                <SymbolIcon Symbol="Filter"></SymbolIcon>
+            </Viewbox>
+            <TextBlock Text="filter" Grid.Column="1"
                                Style="{StaticResource PageHeaderTextBlockStyle}"></TextBlock>
-                </Grid>
-            </DataTemplate>
-        </ListView.HeaderTemplate>
-        
-        <ListView.ItemContainerStyle>
-            <Style TargetType="ListViewItem">
-                <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
-                <Setter Property="Padding" Value="3,0,3,0"></Setter>
-            </Style>
-        </ListView.ItemContainerStyle>
-        
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <CheckBox Style="{StaticResource ChecklistItemCheckBoxStyle}"
+        </Grid>
+
+        <ListView ItemsSource="{Binding Source={StaticResource FilterList}}"
+                  Grid.Row="1" Margin="19,0,19,0" SelectionMode="None">
+
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                    <Setter Property="Padding" Value="3,0,3,0"></Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox Style="{StaticResource ChecklistItemCheckBoxStyle}"
                           IsChecked="{Binding IsChecked, Mode=TwoWay}"
                           HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <CheckBox.Content>
-                        <Grid>
-                            <TextBlock Foreground="{ThemeResource PhoneForegroundBrush}">
+                        <CheckBox.Content>
+                            <Grid>
+                                <TextBlock Foreground="{ThemeResource PhoneForegroundBrush}">
                                 <Run Text="{Binding Content}"/>
-                            </TextBlock>
-                            <TextBlock Foreground="{ThemeResource PhoneMidBrush}" HorizontalAlignment="Right">
+                                </TextBlock>
+                                <TextBlock Foreground="{ThemeResource PhoneMidBrush}" HorizontalAlignment="Right">
                                 (<Run Text="{Binding Weightage}"/> results)
-                            </TextBlock>
-                        </Grid>
-                    </CheckBox.Content>
-                </CheckBox>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-        
-        <ListView.GroupStyle>
-            <GroupStyle HidesIfEmpty="True">
-                <GroupStyle.HeaderContainerStyle>
-                    <Style TargetType="ListViewHeaderItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
-                    </Style>
-                </GroupStyle.HeaderContainerStyle>
-                <GroupStyle.HeaderTemplate>
-                    <DataTemplate>
-                        <Border Padding="3,3,0,3" BorderBrush="{ThemeResource PhoneAccentBrush}"
+                                </TextBlock>
+                            </Grid>
+                        </CheckBox.Content>
+                    </CheckBox>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+            <ListView.GroupStyle>
+                <GroupStyle HidesIfEmpty="True">
+                    <GroupStyle.HeaderContainerStyle>
+                        <Style TargetType="ListViewHeaderItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                        </Style>
+                    </GroupStyle.HeaderContainerStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <Border Padding="3,3,0,3" BorderBrush="{ThemeResource PhoneAccentBrush}"
                                 BorderThickness="0,0,0,2.5" Margin="0,15,2,10">
-                            <TextBlock Text="{Binding Label, Mode=OneTime}" Foreground="{ThemeResource PhoneAccentBrush}"
+                                <TextBlock Text="{Binding Label, Mode=OneTime}" Foreground="{ThemeResource PhoneAccentBrush}"
                                        FontWeight="Bold" FontSize="21"></TextBlock>
-                        </Border>
-                    </DataTemplate>
-                </GroupStyle.HeaderTemplate>
-            </GroupStyle>
-        </ListView.GroupStyle>
+                            </Border>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
+        </ListView>
     
-    </ListView>
-    
+    </Grid>
+
 </Page>

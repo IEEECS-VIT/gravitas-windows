@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using GravitasApp.Managers;
 using Windows.UI.ViewManagement;
+using System.ComponentModel;
 
 
 namespace GravitasApp
@@ -21,22 +22,50 @@ namespace GravitasApp
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page, IManageable
+    public sealed partial class MainPage : Page, IManageable, INotifyPropertyChanged
     {
+
+        private string _sampleText;
+        DispatcherTimer timer;
+
+        public string SampleText
+        {
+            get { return _sampleText; }
+            set
+            {
+                _sampleText = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("SampleText"));
+            }
+        }
+
         public MainPage()
         {
             this.InitializeComponent();
+            
+            timer = new DispatcherTimer();
+            timer.Interval = new TimeSpan(0, 0, 30);
+            timer.Tick += timer_Tick;
+            timer.Start();
+
+            this.DataContext = this;
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.
-        /// This parameter is typically used to configure the page.</param>
+        void timer_Tick(object sender, object e)
+        {
+            
+        }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             PageManager.RegisterPage(this);
             StatusBar.GetForCurrentView().HideAsync();
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            timer.Tick -= timer_Tick;
+            timer.Stop();
         }
 
         public Dictionary<string, object> SaveState()
@@ -52,5 +81,12 @@ namespace GravitasApp
         {
             return true;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            SampleText = "asdasdasdasdccgcgcgc";
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

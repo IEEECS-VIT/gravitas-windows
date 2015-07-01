@@ -103,7 +103,6 @@ namespace GravitasApp
                 PageManager.NavigateTo(typeof(MainPage), null, NavigationType.FreshStart);
             }
 
-
             // Ensure the current window is active
             Window.Current.Activate();
         }

@@ -66,5 +66,12 @@ namespace GravitasApp
             PageManager.NavigateBack();
         }
 
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (IFilter<Event> filter in DataManager.Filters)
+                filter.ResetAllFlags();
+            PageManager.NavigateBack();
+        }
+
     }
 }
