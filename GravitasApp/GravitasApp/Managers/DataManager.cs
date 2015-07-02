@@ -7,6 +7,7 @@ using Windows.Storage;
 using GravitasSDK.Providers;
 using GravitasSDK.DataModel;
 using System.Collections.ObjectModel;
+using GravitasApp.Helpers;
 
 
 namespace GravitasApp.Managers
@@ -54,9 +55,9 @@ namespace GravitasApp.Managers
 
         #endregion
 
+        // Temporary Set-up
         public static async Task LoadEventsAsync()
         {
-            // Temporary Set-up
             StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Events.xml"));
             EventList = (await ContentSerializer.ParseEventsAsync(file)).ToList();
             _filterList.GenerateChecklist(_eventList);
@@ -64,11 +65,14 @@ namespace GravitasApp.Managers
 
         #region Constructor
 
+        // Temporary Set-up
         static DataManager()
         {
             FilterList = new FilterCriteria<Event>();
             FilterList.Add(new FilterCriterion<Event, string>((e) => e.Category, "CATEGORY"));
             FilterList.Add(new FilterCriterion<Event, string>((e) => e.Venue, "VENUE"));
+
+            CategoryMetadata.Initialize();
         }
 
         #endregion

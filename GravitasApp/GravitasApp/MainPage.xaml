@@ -14,7 +14,31 @@
                 <Setter Property="HeaderTemplate">
                     <Setter.Value>
                         <DataTemplate>
-                            <Grid Margin="0" Visibility="Collapsed"></Grid>
+                            <Grid Visibility="Collapsed" Margin="0"></Grid>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            
+            <Style TargetType="TextBlock" x:Key="SectionHeaderTextBlockStyle" BasedOn="{StaticResource GroupHeaderTextBlockStyle}">
+                <Setter Property="TextLineBounds" Value="Tight"></Setter>
+                <Setter Property="LineStackingStrategy" Value="MaxHeight"></Setter>
+                <Setter Property="MaxLines" Value="1"></Setter>
+                <Setter Property="Margin" Value="0,0,0,13"></Setter>
+                <Setter Property="VerticalAlignment" Value="Top"></Setter>
+            </Style>
+            
+            <Style TargetType="HyperlinkButton" x:Key="ArrowedHyperlinkButtonStyle">
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding}" Style="{StaticResource GroupHeaderTextBlockStyle}"
+                                           Foreground="Silver"></TextBlock>
+                                <TextBlock Text=" &#8250;" Style="{StaticResource PageHeaderTextBlockStyle}"
+                                           TextLineBounds="Tight" VerticalAlignment="Center" Foreground="Silver"
+                                           LineStackingStrategy="BaselineToBaseline"></TextBlock>
+                            </StackPanel>
                         </DataTemplate>
                     </Setter.Value>
                 </Setter>
@@ -23,7 +47,7 @@
         </ResourceDictionary>
     </Page.Resources>
     
-    <Hub Header="graVITas">
+    <Hub x:Name="mainHub" Header="graVITas">
         
         <Hub.Background>
             <ImageBrush ImageSource="ms-appx:///Assets/Gravitas/HubBackground.png" Stretch="UniformToFill"></ImageBrush>
@@ -40,86 +64,93 @@
         
         <HubSection>
             <DataTemplate>
-                <StackPanel>
-                    <TextBlock Margin="0,0,0,13" Text="about" Style="{StaticResource GroupHeaderTextBlockStyle}"></TextBlock>
-                    <TextBlock Style="{StaticResource BodyTextBlockStyle}" TextAlignment="Left">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Text="about" Style="{StaticResource SectionHeaderTextBlockStyle}"></TextBlock>
+                    
+                    <TextBlock Grid.Row="1" Style="{StaticResource BodyTextBlockStyle}" Margin="0,0,3,0">
                         graVITas '15 is an amalgam of technology and ingenuity where both come together with creativity.
                         Come showcase your skills on one of the biggest platforms around!
                     </TextBlock>
-                    <Grid Margin="0,20,0,13">
+                    
+                    <Grid Grid.Row="2" VerticalAlignment="Center">
+                        <Grid.Resources>
+                            <ResourceDictionary>
+                                <Style TargetType="TextBlock" x:Key="PrimaryLabelTextBlockStyle" BasedOn="{StaticResource MessageDialogTitleStyle}">
+                                    <Setter Property="TextAlignment" Value="Center"></Setter>
+                                    <Setter Property="Foreground" Value="Gold"></Setter>
+                                </Style>
+                                <Style TargetType="TextBlock" x:Key="SecondaryLabelTextBlockStyle" BasedOn="{StaticResource MessageDialogContentStyle}">
+                                    <Setter Property="TextAlignment" Value="Center"></Setter>
+                                    <Setter Property="Foreground" Value="Silver"></Setter>
+                                </Style>
+                                <x:Double x:Key="IconSize">70</x:Double>
+                            </ResourceDictionary>
+                        </Grid.Resources>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-
                         <Grid Grid.Column="0" Margin="10" HorizontalAlignment="Left">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <Viewbox Width="70" Height="70" Stretch="Uniform">
+                            <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}" Stretch="Uniform">
                                 <SymbolIcon Symbol="Globe" Foreground="LightGray"></SymbolIcon>
                             </Viewbox>
                             <StackPanel Grid.Row="1" VerticalAlignment="Center">
-                                <TextBlock Style="{StaticResource MessageDialogTitleStyle}" TextAlignment="Center"
-                                           Text="400+" Foreground="Gold"></TextBlock>
-                                <TextBlock Style="{StaticResource MessageDialogContentStyle}" TextAlignment="Center"
-                                           Text="colleges" Foreground="Silver"></TextBlock>
+                                <TextBlock Text="400+" Style="{StaticResource PrimaryLabelTextBlockStyle}"></TextBlock>
+                                <TextBlock Text="colleges" Style="{StaticResource SecondaryLabelTextBlockStyle}"></TextBlock>
                             </StackPanel>
                         </Grid>
-
                         <Grid Grid.Column="1" Margin="10" HorizontalAlignment="Left">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <Viewbox Width="70" Height="70" Stretch="Uniform">
+                            <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}" Stretch="Uniform">
                                 <SymbolIcon Symbol="Play" Foreground="LightGray"></SymbolIcon>
                             </Viewbox>
                             <StackPanel Grid.Row="1" VerticalAlignment="Center">
-                                <TextBlock Style="{StaticResource MessageDialogTitleStyle}" TextAlignment="Center"
-                                           Text="150+" Foreground="Gold"></TextBlock>
-                                <TextBlock Style="{StaticResource MessageDialogContentStyle}" TextAlignment="Center"
-                                           Text="events" Foreground="Silver"></TextBlock>
+                                <TextBlock Text="150+" Style="{StaticResource PrimaryLabelTextBlockStyle}"></TextBlock>
+                                <TextBlock Text="activities" Style="{StaticResource SecondaryLabelTextBlockStyle}"></TextBlock>
                             </StackPanel>
                         </Grid>
-                        
                         <Grid Grid.Column="2" Margin="10" HorizontalAlignment="Left">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <Viewbox Width="70" Height="70" Stretch="Uniform">
+                            <Viewbox Width="{StaticResource IconSize}" Height="{StaticResource IconSize}" Stretch="Uniform">
                                 <SymbolIcon Symbol="Clock" Foreground="LightGray"></SymbolIcon>
                             </Viewbox>
                             <StackPanel Grid.Row="1" VerticalAlignment="Center">
-                                <TextBlock Style="{StaticResource MessageDialogTitleStyle}" TextAlignment="Center"
-                                           Text="72" Foreground="Gold"></TextBlock>
-                                <TextBlock Style="{StaticResource MessageDialogContentStyle}" TextAlignment="Center"
-                                           Text="hours" Foreground="Silver"></TextBlock>
+                                <TextBlock Text="72" Style="{StaticResource PrimaryLabelTextBlockStyle}"></TextBlock>
+                                <TextBlock Text="hours" Style="{StaticResource SecondaryLabelTextBlockStyle}"></TextBlock>
                             </StackPanel>
                         </Grid>
-                        
                     </Grid>
                     
-                    <TextBlock Margin="0,7,0,10" Text="theme" Style="{StaticResource GroupHeaderTextBlockStyle}"></TextBlock>
-                    <Viewbox Stretch="Uniform" Margin="0,0,7,0">
-                        <TextBlock Text="DESIGN. CREATE. PATENT." Style="{StaticResource MessageDialogTitleStyle}"></TextBlock>
-                    </Viewbox>
+                    <StackPanel Grid.Row="3" VerticalAlignment="Top">
+                        <TextBlock Text="theme" Style="{StaticResource SectionHeaderTextBlockStyle}" Margin="0,0,0,3"></TextBlock>
+                        <Viewbox Stretch="Uniform" Margin="0,0,10,0">
+                            <TextBlock Text="DESIGN. CREATE. PATENT." Style="{StaticResource MessageDialogTitleStyle}"></TextBlock>
+                        </Viewbox>
+                    </StackPanel>
+
+                    <HyperlinkButton Grid.Row="4" Style="{StaticResource ArrowedHyperlinkButtonStyle}" Margin="0,0,7,10"
+                                     Content="browse" Click="BrowseButton_Click" HorizontalAlignment="Right"></HyperlinkButton>
                     
-                    <Border>
-                        <Border.Transitions>
-                            <TransitionCollection>
-                                <EntranceThemeTransition FromVerticalOffset="-200"></EntranceThemeTransition>
-                            </TransitionCollection>
-                        </Border.Transitions>
-                    </Border>
-                    <TextBlock Margin="0,20,0,0" Text="{Binding SampleText, Mode=OneWay}"
-                               Style="{StaticResource MessageDialogContentStyle}">
-                    </TextBlock>
-                    
-                </StackPanel>
+                </Grid>
             </DataTemplate>
         </HubSection>
 
@@ -130,50 +161,20 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <!--<TextBlock Style="{StaticResource GroupHeaderTextBlockStyle}"
-                               Margin="0,0,0,17" Text="event categories"></TextBlock>-->
-                    <ListView Grid.Row="1">
-                        <ListViewItem>
-                            <StackPanel Margin="0,0,10,30">
-                                <Grid>
-                                    <Image Source="ms-appx:///Assets/Gravitas/bitsandbytes.png" Height="180" Stretch="UniformToFill"></Image>
-                                </Grid>
-                                <TextBlock Margin="5,3,0,0" Text="BITS AND BYTES" Style="{StaticResource MessageDialogTitleStyle}" FontWeight="Bold"
-                                           HorizontalAlignment="Left" Foreground="SteelBlue"></TextBlock>
-                                <TextBlock Margin="5,3,0,0" Style="{StaticResource BodyTextBlockStyle}" TextAlignment="Left"> 
-                                            Geek is the new cool! Compete across various domains covering programming, networking, algorithms and many more.
-                                </TextBlock>
-                            </StackPanel>
-                        </ListViewItem>
-                        <ListViewItem>
-                            <StackPanel Margin="0,0,5,30">
-                                <Grid>
-                                    <Image Source="ms-appx:///Assets/Gravitas/bioxyn.png" Height="180" Stretch="UniformToFill"></Image>
-                                </Grid>
-                                        <TextBlock Margin="5,3,0,0" Text="BIOXYN" Style="{StaticResource MessageDialogTitleStyle}" FontWeight="Bold"
-                                           HorizontalAlignment="Left" Foreground="Green"></TextBlock>
-                                        <TextBlock Margin="5,3,0,0" Style="{StaticResource BodyTextBlockStyle}" TextAlignment="Left"> 
-                                            Its the survival of the fittest, time to put those neurons to use!
-                                        </TextBlock>
-                            </StackPanel>
-                        </ListViewItem>
-                        <ListViewItem>
-                            <StackPanel Margin="0,0,5,30">
-                                <Grid>
-                                    <Image Source="ms-appx:///Assets/Gravitas/bioxyn.png" Height="180" Stretch="UniformToFill"></Image>
-                                    <Border VerticalAlignment="Bottom">
-                                        <Border.Background>
-                                            <SolidColorBrush Color="{ThemeResource ContentDialogDimmingColor}"></SolidColorBrush>
-                                        </Border.Background>
-                                        <TextBlock Margin="10,3,0,3" Text="BIOXYN" Style="{StaticResource MessageDialogTitleStyle}" FontWeight="Bold"
-                                           VerticalAlignment="Bottom" HorizontalAlignment="Left"></TextBlock>
-                                    </Border>
-                                </Grid>
-                                <TextBlock Margin="0,10,0,0" Style="{StaticResource BodyTextBlockStyle}" TextAlignment="Left"> 
-                                    Geek is the new cool! Compete promising participants across various domains covering programming, networking and security, algorithms and a lot more.
-                                </TextBlock>
-                            </StackPanel>
-                        </ListViewItem>
+                    <TextBlock Text="event categories" Style="{StaticResource SectionHeaderTextBlockStyle}"></TextBlock>
+                    <ListView Grid.Row="1" ItemsSource="{Binding CategoryInfoList}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,0,10,30">
+                                    <Grid>
+                                        <Image Source="{Binding ImageUri}" Height="180" Stretch="UniformToFill"></Image>
+                                    </Grid>
+                                    <TextBlock Margin="5,3,0,0" Text="{Binding Name}" Style="{StaticResource MessageDialogTitleStyle}"
+                                               HorizontalAlignment="Left" Foreground="{Binding LabelBrush}"></TextBlock>
+                                    <TextBlock Text="{Binding Info}" Margin="5,3,0,0" Style="{StaticResource BodyTextBlockStyle}"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
                     </ListView>
                 </Grid>
             </DataTemplate>
@@ -183,6 +184,4 @@
 
     </Hub>
 
-    <!-- graVITas is organized and hosted every year by VIT University, Vellore. -->
-    
 </Page>

@@ -15,58 +15,38 @@ using Windows.UI.Xaml.Navigation;
 using GravitasApp.Managers;
 using Windows.UI.ViewManagement;
 using System.ComponentModel;
+using Windows.UI.Xaml.Media.Imaging;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using Windows.Storage;
+using Windows.UI;
+using GravitasApp.Helpers;
 
 
 namespace GravitasApp
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+
     public sealed partial class MainPage : Page, IManageable, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        private string _sampleText;
-        DispatcherTimer timer;
-
-        public string SampleText
-        {
-            get { return _sampleText; }
-            set
-            {
-                _sampleText = value;
-                if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("SampleText"));
-            }
-        }
+        public IEnumerable<CategoryMetadata> CategoryInfoList
+        { get; private set; }
 
         public MainPage()
         {
             this.InitializeComponent();
-            
-            timer = new DispatcherTimer();
-            timer.Interval = new TimeSpan(0, 0, 30);
-            timer.Tick += timer_Tick;
-            timer.Start();
-
+            CategoryInfoList = CategoryMetadata.InfoList;
             this.DataContext = this;
         }
 
-        void timer_Tick(object sender, object e)
-        {
-            
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             PageManager.RegisterPage(this);
-            StatusBar.GetForCurrentView().HideAsync();
+            await StatusBar.GetForCurrentView().HideAsync();
         }
 
-        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
-        {
-            timer.Tick -= timer_Tick;
-            timer.Stop();
-        }
+        #region IManageable Implementation
 
         public Dictionary<string, object> SaveState()
         {
@@ -82,11 +62,12 @@ namespace GravitasApp
             return true;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            SampleText = "asdasdasdasdccgcgcgc";
-        }
+        #endregion
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        private void BrowseButton_Click(object sender, RoutedEventArgs e)
+        {
+            mainHub.ScrollToSection(mainHub.Sections[1]);
+        }
+    
     }
 }

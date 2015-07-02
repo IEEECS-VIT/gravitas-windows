@@ -94,6 +94,7 @@
     <Compile Include="FilterPage.xaml.cs">
       <DependentUpon>FilterPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CategoryMetadata.cs" />
     <Compile Include="Helpers\ViewDependencies.cs" />
     <Compile Include="IntroPage.xaml.cs">
       <DependentUpon>IntroPage.xaml</DependentUpon>
@@ -126,6 +127,7 @@
     <Content Include="Assets\AppLogos\StoreLogo.scale-240.png" />
     <Content Include="Assets\AppLogos\WideLogo.scale-240.png" />
     <Content Include="Assets\Gravitas\HubBackground.png" />
+    <Content Include="Assets\Gravitas\robomania.png" />
     <Content Include="Events.xml" />
   </ItemGroup>
   <ItemGroup>
