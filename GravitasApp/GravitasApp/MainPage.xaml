@@ -6,10 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    
+
     <Page.Resources>
         <ResourceDictionary>
-            
+
             <Style TargetType="HubSection">
                 <Setter Property="HeaderTemplate">
                     <Setter.Value>
@@ -19,7 +19,7 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            
+
             <Style TargetType="TextBlock" x:Key="SectionHeaderTextBlockStyle" BasedOn="{StaticResource GroupHeaderTextBlockStyle}">
                 <Setter Property="TextLineBounds" Value="Tight"></Setter>
                 <Setter Property="LineStackingStrategy" Value="MaxHeight"></Setter>
@@ -27,7 +27,7 @@
                 <Setter Property="Margin" Value="0,0,0,13"></Setter>
                 <Setter Property="VerticalAlignment" Value="Top"></Setter>
             </Style>
-            
+
             <Style TargetType="HyperlinkButton" x:Key="ArrowedHyperlinkButtonStyle">
                 <Setter Property="ContentTemplate">
                     <Setter.Value>
@@ -43,25 +43,25 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            
+
         </ResourceDictionary>
     </Page.Resources>
-    
+
     <Hub x:Name="mainHub" Header="graVITas">
-        
+
         <Hub.Background>
             <ImageBrush ImageSource="ms-appx:///Assets/Gravitas/HubBackground.png" Stretch="UniformToFill"></ImageBrush>
         </Hub.Background>
-        
+
         <Hub.HeaderTemplate>
             <DataTemplate>
-                    <Viewbox Height="70" Margin="3,17,0,0">
-                        <Image Source="ms-appx:///Assets/Gravitas/GravitasTitle.png"
+                <Viewbox Height="70" Margin="3,17,0,0">
+                    <Image Source="ms-appx:///Assets/Gravitas/GravitasTitle.png"
                                Stretch="UniformToFill"></Image>
-                    </Viewbox>
+                </Viewbox>
             </DataTemplate>
         </Hub.HeaderTemplate>
-        
+
         <HubSection>
             <DataTemplate>
                 <Grid>
@@ -72,14 +72,14 @@
                         <RowDefinition Height="1*"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
-                    
+
                     <TextBlock Text="about" Style="{StaticResource SectionHeaderTextBlockStyle}"></TextBlock>
-                    
+
                     <TextBlock Grid.Row="1" Style="{StaticResource BodyTextBlockStyle}" Margin="0,0,3,0">
                         graVITas '15 is an amalgam of technology and ingenuity where both come together with creativity.
                         Come showcase your skills on one of the biggest platforms around!
                     </TextBlock>
-                    
+
                     <Grid Grid.Row="2" VerticalAlignment="Center">
                         <Grid.Resources>
                             <ResourceDictionary>
@@ -139,7 +139,7 @@
                             </StackPanel>
                         </Grid>
                     </Grid>
-                    
+
                     <StackPanel Grid.Row="3" VerticalAlignment="Top">
                         <TextBlock Text="theme" Style="{StaticResource SectionHeaderTextBlockStyle}" Margin="0,0,0,3"></TextBlock>
                         <Viewbox Stretch="Uniform" Margin="0,0,10,0">
@@ -148,8 +148,8 @@
                     </StackPanel>
 
                     <HyperlinkButton Grid.Row="4" Style="{StaticResource ArrowedHyperlinkButtonStyle}" Margin="0,0,7,10"
-                                     Content="browse" Click="BrowseButton_Click" HorizontalAlignment="Right"></HyperlinkButton>
-                    
+                                     Content="browse categories" Click="BrowseButton_Click" HorizontalAlignment="Right"></HyperlinkButton>
+
                 </Grid>
             </DataTemplate>
         </HubSection>
@@ -162,7 +162,8 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <TextBlock Text="event categories" Style="{StaticResource SectionHeaderTextBlockStyle}"></TextBlock>
-                    <ListView Grid.Row="1" ItemsSource="{Binding CategoryInfoList}">
+                    <ListView Grid.Row="1" ItemsSource="{Binding CategoryInfoList}"
+                              IsItemClickEnabled="True" ItemClick="CategoryView_ItemClick" Margin="0,3,0,0">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Margin="0,0,10,30">
@@ -179,8 +180,37 @@
                 </Grid>
             </DataTemplate>
         </HubSection>
-        
-        <HubSection></HubSection>
+
+        <HubSection>
+            <DataTemplate>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="1.3*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="workshops" Style="{StaticResource SectionHeaderTextBlockStyle}"></TextBlock>
+                    
+                    <Image Grid.Row="1" Source="ms-appx:///Assets/Gravitas/workshop.png"
+                           Stretch="Uniform" Margin="20,20,20,10"></Image>
+                    
+                    <StackPanel Grid.Row="2" VerticalAlignment="Center">
+                        <TextBlock Text="JUMP INTO THE GAME" Style="{StaticResource MessageDialogTitleStyle}"
+                                   Margin="0,0,10,13" Foreground="Gold" HorizontalAlignment="Center" TextLineBounds="TrimToCapHeight"></TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}">
+                            With over 30 workshops to choose from, jump start into building the thing you love and learn about the latest technologies right here.<LineBreak/>
+                            <LineBreak/>After all, what's an engineer that can't build?
+                        </TextBlock>
+                    </StackPanel>
+                    
+                    <HyperlinkButton Content="view all workshops" Click="ViewWorkshopsButton_Click" Style="{StaticResource ArrowedHyperlinkButtonStyle}"
+                                     Grid.Row="4" HorizontalAlignment="Right" Margin="0,0,7,10"></HyperlinkButton>
+                    
+                </Grid>
+            </DataTemplate>
+        </HubSection>
 
     </Hub>
 

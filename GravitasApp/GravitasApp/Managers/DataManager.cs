@@ -77,5 +77,15 @@ namespace GravitasApp.Managers
 
         #endregion
 
+        public static void SetFilterToCategory(string category)
+        {
+            FilterCriteria.ResetAllFlags();
+            foreach (var item in (FilterList[0] as FilterCriterion<Event, string>).Checklist)
+            {
+                if (string.Equals(item.Content, category, StringComparison.OrdinalIgnoreCase))
+                    item.IsChecked = true;
+            }
+        }
+
     }
 }

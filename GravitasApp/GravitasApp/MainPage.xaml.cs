@@ -68,6 +68,18 @@ namespace GravitasApp
         {
             mainHub.ScrollToSection(mainHub.Sections[1]);
         }
+
+        private void ViewWorkshopsButton_Click(object sender, RoutedEventArgs e)
+        {
+            DataManager.SetFilterToCategory("Workshop");
+            PageManager.NavigateTo(typeof(EventBrowserPage), null, NavigationType.Default);
+        }
+
+        private void CategoryView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            DataManager.SetFilterToCategory((e.ClickedItem as CategoryMetadata).Name);
+            PageManager.NavigateTo(typeof(EventBrowserPage), null, NavigationType.Default);
+        }
     
     }
 }

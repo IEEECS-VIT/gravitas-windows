@@ -128,6 +128,7 @@
     <Content Include="Assets\AppLogos\WideLogo.scale-240.png" />
     <Content Include="Assets\Gravitas\HubBackground.png" />
     <Content Include="Assets\Gravitas\robomania.png" />
+    <Content Include="Assets\Gravitas\workshop.png" />
     <Content Include="Events.xml" />
   </ItemGroup>
   <ItemGroup>

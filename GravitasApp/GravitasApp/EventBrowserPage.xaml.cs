@@ -103,7 +103,13 @@ namespace GravitasApp
             if (_filterCount == 0)
                 _filteredEvents = DataManager.Events;
             else
-                _filteredEvents = DataManager.FilterCriteria.FilterItems(DataManager.Events);
+            {
+                List<Event> temp = new List<Event>();
+                foreach (Event e in DataManager.Events)
+                    if (GetLenientQualification(e) == true)
+                        temp.Add(e);
+                _filteredEvents = temp;
+            }
             SelectedEvents = _filteredEvents;
 
             try
@@ -159,6 +165,18 @@ namespace GravitasApp
             }
             else
                 SelectedEvents = _filteredEvents;
+        }
+
+        private bool GetLenientQualification(Event e)
+        {
+            foreach (IFilter<Event> filter in DataManager.Filters)
+            {
+                if (filter.GetCheckCount() == 0)
+                    continue;
+                if (filter.CheckQualification(e) == false)
+                    return false;
+            }
+            return true;
         }
 
     }
