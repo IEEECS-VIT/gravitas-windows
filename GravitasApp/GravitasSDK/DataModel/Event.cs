@@ -18,6 +18,8 @@ namespace GravitasSDK.DataModel
         private List<uint> _prizes;
         [DataMember]
         private List<Coordinator> _coordinators;
+        [DataMember]
+        private List<string> _associatedChapters;
 
         [DataMember]
         public string Title { get; private set; }
@@ -35,8 +37,7 @@ namespace GravitasSDK.DataModel
         [DataMember]
         public DateTimeOffset EndTime { get; private set; }
         public ReadOnlyCollection<Coordinator> Coordinators { get; private set; }
-        [DataMember]
-        public string MiscDetails { get; private set; }
+        public ReadOnlyCollection<string> AssociatedChapters { get; private set; }
 
         #endregion
 
@@ -58,6 +59,7 @@ namespace GravitasSDK.DataModel
         {
             Prizes = new ReadOnlyCollection<uint>(_prizes);
             Coordinators = new ReadOnlyCollection<Coordinator>(_coordinators);
+            AssociatedChapters = new ReadOnlyCollection<string>(_associatedChapters);
         }
 
         #endregion
