@@ -117,6 +117,9 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Gravitas\appliedengineering.png" />
+    <Content Include="Assets\Gravitas\builtrix.png" />
+    <Content Include="Assets\Gravitas\circuitrix.png" />
     <Content Include="Assets\Gravitas\bioxyn.png" />
     <Content Include="Assets\Gravitas\bitsandbytes.png" />
     <Content Include="Assets\Gravitas\GravitasTitle.png" />
@@ -127,7 +130,13 @@
     <Content Include="Assets\AppLogos\StoreLogo.scale-240.png" />
     <Content Include="Assets\AppLogos\WideLogo.scale-240.png" />
     <Content Include="Assets\Gravitas\HubBackground.png" />
+    <Content Include="Assets\Gravitas\informals.png" />
+    <Content Include="Assets\Gravitas\premium.png" />
+    <Content Include="Assets\Gravitas\management.png" />
+    <Content Include="Assets\Gravitas\online.png" />
+    <Content Include="Assets\Gravitas\quiz.png" />
     <Content Include="Assets\Gravitas\robomania.png" />
+    <Content Include="Assets\Gravitas\school.png" />
     <Content Include="Assets\Gravitas\workshop.png" />
     <Content Include="Events.xml" />
   </ItemGroup>

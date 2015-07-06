@@ -34,7 +34,7 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding}" Style="{StaticResource GroupHeaderTextBlockStyle}"
-                                           Foreground="Silver"></TextBlock>
+                                           Foreground="Silver" Padding="3,3,0,3"></TextBlock>
                                 <TextBlock Text=" &#8250;" Style="{StaticResource PageHeaderTextBlockStyle}"
                                            TextLineBounds="Tight" VerticalAlignment="Center" Foreground="Silver"
                                            LineStackingStrategy="BaselineToBaseline"></TextBlock>
@@ -148,7 +148,7 @@
                     </StackPanel>
 
                     <HyperlinkButton Grid.Row="4" Style="{StaticResource ArrowedHyperlinkButtonStyle}" Margin="0,0,7,10"
-                                     Content="browse categories" Click="BrowseButton_Click" HorizontalAlignment="Right"></HyperlinkButton>
+                                     Content="browse events" Click="BrowseButton_Click" HorizontalAlignment="Right"></HyperlinkButton>
 
                 </Grid>
             </DataTemplate>
@@ -166,13 +166,13 @@
                               IsItemClickEnabled="True" ItemClick="CategoryView_ItemClick" Margin="0,3,0,0">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Margin="0,0,10,30">
+                                <StackPanel Margin="0,0,10,32">
                                     <Grid>
                                         <Image Source="{Binding ImageUri}" Height="180" Stretch="UniformToFill"></Image>
                                     </Grid>
                                     <TextBlock Margin="5,3,0,0" Text="{Binding Name}" Style="{StaticResource MessageDialogTitleStyle}"
                                                HorizontalAlignment="Left" Foreground="{Binding LabelBrush}"></TextBlock>
-                                    <TextBlock Text="{Binding Info}" Margin="5,3,0,0" Style="{StaticResource BodyTextBlockStyle}"></TextBlock>
+                                    <TextBlock Text="{Binding Info}" Margin="5,2,0,0" Style="{StaticResource BodyTextBlockStyle}"></TextBlock>
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
