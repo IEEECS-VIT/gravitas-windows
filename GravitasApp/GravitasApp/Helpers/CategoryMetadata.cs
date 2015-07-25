@@ -73,7 +73,7 @@ namespace GravitasApp.Helpers
                 Colors.DarkSalmon));
             _infoList.Add(new CategoryMetadata(
                 "ROBOMANIA",
-                "Robots are always fascinating! Especially when they can run, drive, jump, fight - everything you wanted to be.",
+                "Robots are always fascinating! Make them run, fly, fight, anything and have the world watch in awe.",
                 Colors.LightGray));
             _infoList.Add(new CategoryMetadata(
                 "BITS AND BYTES",
