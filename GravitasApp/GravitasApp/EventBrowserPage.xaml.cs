@@ -179,6 +179,11 @@ namespace GravitasApp
             return true;
         }
 
+        private void AboutButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 
 }

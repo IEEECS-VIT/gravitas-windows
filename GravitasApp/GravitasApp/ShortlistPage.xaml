@@ -9,6 +9,32 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0" Margin="19,7,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Viewbox Width="35" Height="35" Margin="0,0,7,0" 
+                             VerticalAlignment="Center" HorizontalAlignment="Center">
+                <SymbolIcon Symbol="Favorite"></SymbolIcon>
+            </Viewbox>
+            <TextBlock Text="shortlist" Grid.Column="1"
+                               Style="{StaticResource PageHeaderTextBlockStyle}"></TextBlock>
+        </Grid>
 
+        <Grid Grid.Row="1" Margin="19,17,19,0">
+            <TextBlock Text="You have not yet shortlisted any events." Visibility="{Binding Converter={StaticResource ListToVisibilityConverter}}"
+                       Style="{StaticResource GroupHeaderTextBlockStyle}"></TextBlock>
+        </Grid>
+        
     </Grid>
+    
 </Page>

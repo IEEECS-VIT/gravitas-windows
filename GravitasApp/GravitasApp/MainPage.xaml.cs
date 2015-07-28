@@ -64,11 +64,6 @@ namespace GravitasApp
 
         #endregion
 
-        private void BrowseButton_Click(object sender, RoutedEventArgs e)
-        {
-            mainHub.ScrollToSection(mainHub.Sections[1]);
-        }
-
         private void ViewWorkshopsButton_Click(object sender, RoutedEventArgs e)
         {
             DataManager.SetFilterToCategory("Workshop");
@@ -80,6 +75,16 @@ namespace GravitasApp
             DataManager.SetFilterToCategory((e.ClickedItem as CategoryMetadata).Name);
             PageManager.NavigateTo(typeof(EventBrowserPage), null, NavigationType.Default);
         }
-    
+
+        private void ShortlistButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AboutButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }

@@ -6,7 +6,20 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
+    
+    <Page.BottomAppBar>
+        <CommandBar ClosedDisplayMode="Minimal" Background="{StaticResource CommandBarBackgroundBrush}">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Icon="AllApps" Label="all events"></AppBarButton>
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="my shortlist" Click="ShortlistButton_Click"></AppBarButton>
+                <AppBarButton Label="feedback"></AppBarButton>
+                <AppBarButton Label="about" Click="AboutButton_Click"></AppBarButton>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+    
     <Page.Resources>
         <ResourceDictionary>
 
@@ -146,10 +159,6 @@
                             <TextBlock Text="DESIGN. CREATE. PATENT." Style="{StaticResource MessageDialogTitleStyle}"></TextBlock>
                         </Viewbox>
                     </StackPanel>
-
-                    <HyperlinkButton Grid.Row="4" Style="{StaticResource ArrowedHyperlinkButtonStyle}" Margin="0,0,7,10"
-                                     Content="browse events" Click="BrowseButton_Click" HorizontalAlignment="Right"></HyperlinkButton>
-
                 </Grid>
             </DataTemplate>
         </HubSection>

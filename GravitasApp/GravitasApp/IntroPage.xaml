@@ -5,10 +5,75 @@
     xmlns:local="using:GravitasApp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
 
-    <Grid>
+    <Page.Background>
+        <ImageBrush ImageSource="ms-appx:///Assets/Gravitas/SplashScreen.png" Stretch="UniformToFill"></ImageBrush>
+    </Page.Background>
+    
+    <Grid Margin="19,10,19,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
 
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Viewbox Height="50" Margin="0,0,0,0">
+                <Image Source="ms-appx:///Assets/Gravitas/GravitasTitle.png" Stretch="UniformToFill"></Image>
+            </Viewbox>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+        <TextBlock Text="SEP 25 - SEP 27" HorizontalAlignment="Center"
+                   Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
+            <TextBlock Text="VIT University, Vellore" HorizontalAlignment="Center" Style="{StaticResource ControlHeaderTextBlockStyle}"></TextBlock>
+        </StackPanel>
+        <ContentControl Grid.Row="2" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                        Content="{Binding DisplayQuote, Mode=OneWay}" Margin="10">
+            <ContentControl.ContentTransitions>
+                <TransitionCollection>
+                    <ContentThemeTransition></ContentThemeTransition>
+                </TransitionCollection>
+            </ContentControl.ContentTransitions>
+            <ContentControl.ContentTemplate>
+                <DataTemplate>
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <StackPanel.Resources>
+                            <Style x:Key="QuoteTextStyle" TargetType="TextBlock" BasedOn="{StaticResource HeaderTextBlockStyle}">
+                                <Setter Property="FontWeight" Value="Bold"></Setter>
+                                <Setter Property="Foreground" Value="Gold"></Setter>
+                                <Setter Property="TextLineBounds" Value="Tight"></Setter>
+                                <Setter Property="LineStackingStrategy" Value="BaselineToBaseline"></Setter>
+                                <Setter Property="FontFamily" Value="Calibri"></Setter>
+                                <Setter Property="CharacterSpacing" Value="-50"></Setter>
+                            </Style>
+                        </StackPanel.Resources>
+                        <TextBlock Text="&#701;&#701;" Style="{StaticResource QuoteTextStyle}"></TextBlock>
+                        <TextBlock Style="{StaticResource BodyTextBlockStyle}" MaxLines="0"
+                                   Text="{Binding Item1}" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock Text="&#700;&#700;" Style="{StaticResource QuoteTextStyle}" HorizontalAlignment="Right"></TextBlock>
+                        <TextBlock Style="{StaticResource GroupHeaderTextBlockStyle}" HorizontalAlignment="Right">
+                            - <Run Text="{Binding Item2}"></Run>
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ContentControl.ContentTemplate>
+        </ContentControl>
+        
+        <StackPanel Grid.Row="3" Margin="20,0,20,20">
+            <ProgressRing IsActive="False" Background="Transparent" x:Name="progressRing" Foreground="Gold"></ProgressRing>
+            <Button HorizontalAlignment="Stretch" BorderThickness="0" BorderBrush="Transparent"
+                    x:Name="displayButton" Click="Button_Click" Content="{Binding ButtonContent, Mode=OneWay}" Padding="0,5,0,5">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" Style="{StaticResource GroupHeaderTextBlockStyle}" Foreground="{ThemeResource PhoneForegroundBrush}" FontWeight="Normal"
+                                   TextLineBounds="Full" LineStackingStrategy="BlockLineHeight"></TextBlock>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+        </StackPanel>
+        
     </Grid>
+    
 </Page>

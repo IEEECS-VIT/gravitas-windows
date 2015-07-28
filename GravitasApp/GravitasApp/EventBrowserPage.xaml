@@ -9,16 +9,16 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Page.Resources>
-        <ResourceDictionary>
-            <helpers:ListEmptyToVisibilityConverter x:Key="ListToVisibilityConverter"></helpers:ListEmptyToVisibilityConverter>
-        </ResourceDictionary>
-    </Page.Resources>
-    
     <Page.BottomAppBar>
-        <CommandBar>
-            <AppBarButton Icon="Filter" Label="filter" 
-                          Click="FilterButton_Click"></AppBarButton>
+        <CommandBar Background="{StaticResource CommandBarBackgroundBrush}">
+            <CommandBar.PrimaryCommands>
+            <AppBarButton Icon="Filter" Label="filters" Click="FilterButton_Click"></AppBarButton>
+            <AppBarButton Icon="Favorite" Label="my shortlist"></AppBarButton>
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="feedback"></AppBarButton>
+                <AppBarButton Label="about" Click="AboutButton_Click"></AppBarButton>
+            </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
     

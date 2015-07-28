@@ -5,10 +5,213 @@
     xmlns:local="using:GravitasApp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
+    mc:Ignorable="d" x:Name="thisPage"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarToggleButton Icon="Favorite" Label="shortlist"></AppBarToggleButton>
+                <AppBarButton Icon="Phone" Label="contact"></AppBarButton>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <Flyout x:Name="teamSizeFlyout" Placement="Bottom">
+                <Flyout.FlyoutPresenterStyle>
+                    <Style TargetType="FlyoutPresenter">
+                        <Setter Property="Margin" Value="0"></Setter>
+                        <Setter Property="Padding" Value="0"></Setter>
+                        <Setter Property="Background" Value="{StaticResource CommandBarBackgroundBrush}">
+                        </Setter>
+                    </Style>
+                </Flyout.FlyoutPresenterStyle>
+                <StackPanel Margin="19,0,0,13">
+                    <TextBlock Text="team sizes" TextLineBounds="Tight" LineStackingStrategy="BaselineToBaseline" Style="{StaticResource GroupHeaderTextBlockStyle}" Margin="0,0,0,13"></TextBlock>
+                    <TextBlock Text="COD, AOE - 5" Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
+                    <TextBlock Text="NFS, FIFA - 1" Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
+                    <TextBlock Text="DOTA - 2" Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
+                </StackPanel>
+            </Flyout>
+        </ResourceDictionary>
+    </Page.Resources>
+
     <Grid>
+
+        <Grid.Background>
+            <ImageBrush ImageSource="ms-appx:///Assets/Gravitas/informals.png" Stretch="UniformToFill"></ImageBrush>
+        </Grid.Background>
+
+        <Border Grid.RowSpan="2">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <!--<GradientStopCollection>
+                    <GradientStop Color="#40FFFFFF" Offset="0"></GradientStop>
+                    <GradientStop Color="#E0FFFFFF" Offset="0.35"></GradientStop>
+                    <GradientStop Color="White" Offset="0.6"></GradientStop>
+                </GradientStopCollection>-->
+                    <GradientStopCollection>
+                        <GradientStop Color="#40000000" Offset="0"></GradientStop>
+                        <GradientStop Color="#E0000000" Offset="0.35"></GradientStop>
+                        <GradientStop Color="Black" Offset="0.6"></GradientStop>
+                    </GradientStopCollection>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <ScrollViewer>
+            <StackPanel Margin="19,17,19,0">
+                <TextBlock Text="CODE TO CREATE" Style="{StaticResource MessageDialogTitleStyle}" FontSize="27" MaxLines="0" TextWrapping="WrapWholeWords"></TextBlock>
+
+                <TextBlock Text="INFORMALS" Style="{StaticResource TitleTextBlockStyle}" Foreground="MediumPurple" Margin="0,5,0,0"></TextBlock>
+
+                <Grid Margin="0,35,0,0" x:Name="headerGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Viewbox Height="50" HorizontalAlignment="Left" Margin="0,0,13,0">
+                            <SymbolIcon Symbol="People" Margin="0"></SymbolIcon>
+                        </Viewbox>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Top">
+                            <TextBlock Text="TEAM SIZE" Grid.Column="1" Style="{StaticResource ControlHeaderTextBlockStyle}"></TextBlock>
+                            <HyperlinkButton Click="HyperlinkButton_Click" FlyoutBase.AttachedFlyout="{StaticResource teamSizeFlyout}">
+                                <TextBlock Text="options" Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Bottom"
+                                           FontWeight="Normal" Foreground="{ThemeResource PhoneAccentBrush}"></TextBlock>
+                            </HyperlinkButton>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Viewbox Height="50" HorizontalAlignment="Left" Margin="0,0,13,0">
+                            <SymbolIcon Symbol="Tag" Margin="0"></SymbolIcon>
+                        </Viewbox>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Top">
+                            <TextBlock Text="PRIZE MONEY" Grid.Column="1" Style="{StaticResource ControlHeaderTextBlockStyle}"></TextBlock>
+                            <TextBlock Text="25000 INR" Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Bottom"></TextBlock>
+                        </StackPanel>
+                    </Grid>
+
+                </Grid>
+
+
+
+                <Grid Margin="0,40,0,0">
+                    <TextBlock Style="{StaticResource BodyTextBlockStyle}"  MaxLines="5" TextTrimming="CharacterEllipsis">
+                    This is the robotic form of the game cricket. In each round 2 participating team each consisting of 3 members, will play against each other. For batting team, only 1 bot is allowed in the arena. Participants are welcomed with their own bots (which has to alignour specification). In case of a failure of the above case, the team has to play with what we are providing. In case a batsman misses a ball he/she has to switch with his/her team mate. For bowling team, 2 fielding bots will be provided by us, which will be handled by 2 mates at a time. For bowling, the remaining mate will have to push the ball from the area marked in the arena.
+                    </TextBlock>
+                    <Border x:Name="border">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#00000000" Offset="0.5"></GradientStop>
+                                <GradientStop Color="#70000000" Offset="1"></GradientStop>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                </Grid>
+                <TextBlock Text="read more" Style="{StaticResource BodyTextBlockStyle}" Foreground="{ThemeResource PhoneAccentBrush}" Margin="0,3,0,0"></TextBlock>
+
+                <Grid Margin="0,30,0,0" Visibility="Visible">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Viewbox Height="50" HorizontalAlignment="Left" Margin="0,0,13,0">
+                        <SymbolIcon Symbol="Clock" Margin="0"></SymbolIcon>
+                    </Viewbox>
+                    <StackPanel Grid.Column="1">
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0">
+                        <TextBlock Text="FROM:" VerticalAlignment="Center" TextAlignment="Left" Grid.Column="0" Style="{StaticResource ControlHeaderTextBlockStyle}"></TextBlock>
+                            <TextBlock Text=" SEP 25 10:00 am" TextAlignment="Left" HorizontalAlignment="Left" Style="{StaticResource BodyTextBlockStyle}"></TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0">
+                        <TextBlock Text="TO:" VerticalAlignment="Center" TextAlignment="Left" Grid.Column="0" Style="{StaticResource ControlHeaderTextBlockStyle}"></TextBlock>
+                            <TextBlock Text=" SEP 25 10:00 am" TextAlignment="Left" HorizontalAlignment="Left" Style="{StaticResource BodyTextBlockStyle}"></TextBlock>
+                    </StackPanel>
+                    </StackPanel>
+                </Grid>
+                
+                <Grid Margin="0,17,0,0" Visibility="Visible">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Viewbox Height="50" HorizontalAlignment="Left" Margin="0,0,13,0">
+                        <SymbolIcon Symbol="Map" Margin="0"></SymbolIcon>
+                    </Viewbox>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0">
+                        <TextBlock Text="VENUE" VerticalAlignment="Center" TextAlignment="Left" Grid.Column="0" Style="{StaticResource ControlHeaderTextBlockStyle}"></TextBlock>
+                        <TextBlock Text="SJT GRounds" TextAlignment="Left" HorizontalAlignment="Left" Style="{StaticResource BodyTextBlockStyle}"></TextBlock>
+                    </StackPanel>
+                </Grid>
+                
+                <TextBlock Text="REGISTRATION FEES" Margin="0,30,0,0" Style="{StaticResource ControlHeaderTextBlockStyle}"></TextBlock>
+                <TextBlock Text="200 per team" Margin="0,3,0,0" Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
+
+                <TextBlock Text="PRIZES" Margin="0,30,0,0" Style="{StaticResource ControlHeaderTextBlockStyle}"></TextBlock>
+                <TextBlock Text="First Place - 10000 INR" Margin="0,3,0,0" Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
+                <TextBlock Text="Second Place - 7000 INR" Margin="0,3,0,0" Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
+
+            
+
+            <!--
+    <ContentControl Content="{Binding Views}">
+        <ContentControl.ContentTemplate>
+            <DataTemplate>
+                <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                    <TextBlock Text="{Binding ListHeader, Mode=OneWay}" Foreground="Red" Tapped="Button_Click"></TextBlock>
+                    <ListView Grid.Row="1" ItemsSource="{Binding Items, Mode=OneWay}" Visibility="{Binding IsExpanded, Mode=OneWay, Converter={StaticResource BoolVisibilityConverter}}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="hello"></TextBlock>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </DataTemplate>
+        </ContentControl.ContentTemplate>
+    </ContentControl>
+-->
+
+                <ListView x:Name="listView">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapGrid Orientation="Horizontal" MaximumRowsOrColumns="3" SizeChanged="WrapGrid_SizeChanged"
+                                      HorizontalChildrenAlignment="Stretch" VerticalChildrenAlignment="Stretch"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                            <Viewbox Margin="30" Stretch="UniformToFill"
+                                     Child="{Binding}"></Viewbox>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    
+                    <Image Source="ms-appx:///Assets/Gravitas/quiz.png"></Image>
+                    <Image Source="ms-appx:///Assets/AppLogos/logo.scale-240.png"></Image>
+                    <Image Source="ms-appx:///Assets/Gravitas/builtrix.png"></Image>
+                    <Image Source="ms-appx:///Assets/AppLogos/logo.scale-240.png"></Image>
+                    <Image Source="ms-appx:///Assets/AppLogos/logo.scale-240.png"></Image>
+                    
+                </ListView>
+
+            </StackPanel>
+        </ScrollViewer>
 
     </Grid>
 </Page>

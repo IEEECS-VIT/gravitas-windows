@@ -2,7 +2,8 @@
     x:Class="GravitasApp.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:GravitasApp">
+    xmlns:local="using:GravitasApp"
+    xmlns:helpers="using:GravitasApp.Helpers">
 
     <Application.Resources>
         <ResourceDictionary>
@@ -129,6 +130,14 @@
                 <Setter Property="FontSize" Value="{StaticResource PageHeaderFontSize}"></Setter>
                 <Setter Property="VerticalAlignment" Value="Center"></Setter>
             </Style>
+
+            <SolidColorBrush x:Key="CommandBarBackgroundBrush">
+                <Color>#CB000000</Color>
+            </SolidColorBrush>
+
+            <helpers:ListEmptyToVisibilityConverter x:Key="ListToVisibilityConverter"></helpers:ListEmptyToVisibilityConverter>
+
+            <helpers:BoolToVisibiltyConverter x:Key="BoolVisibilityConverter"></helpers:BoolToVisibiltyConverter>
             
         </ResourceDictionary>
     </Application.Resources>

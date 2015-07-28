@@ -25,7 +25,7 @@
     </Page.Resources>
     
     <Page.BottomAppBar>
-        <CommandBar ClosedDisplayMode="Compact">
+        <CommandBar ClosedDisplayMode="Compact" Background="{StaticResource CommandBarBackgroundBrush}">
             <AppBarButton Icon="Accept" Label="done" Click="AcceptButton_Click"></AppBarButton>
             <AppBarButton Icon="Clear" Label="clear all" Click="ClearButton_Click"></AppBarButton>
         </CommandBar>
