@@ -10,11 +10,10 @@
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal" Background="{StaticResource CommandBarBackgroundBrush}">
             <CommandBar.PrimaryCommands>
-                <AppBarButton Icon="AllApps" Label="all events"></AppBarButton>
+                <AppBarButton Icon="AllApps" Label="all events" Click="AllEventsButton_Click"></AppBarButton>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="my shortlist" Click="ShortlistButton_Click"></AppBarButton>
-                <AppBarButton Label="feedback"></AppBarButton>
                 <AppBarButton Label="about" Click="AboutButton_Click"></AppBarButton>
             </CommandBar.SecondaryCommands>
         </CommandBar>

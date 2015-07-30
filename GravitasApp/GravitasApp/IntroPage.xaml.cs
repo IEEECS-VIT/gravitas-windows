@@ -1,4 +1,6 @@
-﻿using GravitasApp.Managers;
+﻿using GravitasApp.Helpers;
+using GravitasApp.Managers;
+using GravitasSDK.Providers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -29,6 +32,7 @@ namespace GravitasApp
         private List<Tuple<string, string>> _quotes;
         private Dictionary<string, string> _buttonContents;
         private string _buttonContent;
+        private string _currentState;
 
         public Tuple<string, string> DisplayQuote
         {
@@ -67,11 +71,14 @@ namespace GravitasApp
                 {"start","begin"},
                 {"progress","downloading content..."},
                 {"complete","start browsing"},
-                {"failed","download failed. Try again"}
+                {"failed","download failed. Try again"},
+                {"refresh", "updating content..."},
+                {"refreshDone", "update successful"},
+                {"refreshFail", "update failed"}
             };
 
             _timer = new DispatcherTimer();
-            _timer.Interval = new TimeSpan(0, 0, 10);
+            _timer.Interval = new TimeSpan(0, 0, 8);
 
             SetButtonState("start");
             this.DataContext = this;
@@ -107,8 +114,20 @@ namespace GravitasApp
             return null;
         }
 
-        public void LoadState(Dictionary<string, object> lastState)
+        public async void LoadState(Dictionary<string, object> lastState)
         {
+            if (DataManager.ContentReady == true)
+            {
+                SetButtonState("refresh");
+                StatusCode code = await Task.Run(() => DataManager.RefreshEventsAsync());
+                if (code == StatusCode.Success || code == StatusCode.NoChange)
+                    SetButtonState("refreshDone");
+                else
+                    SetButtonState("refreshFail");
+
+                await Task.Delay(300);
+                PageManager.NavigateTo(typeof(MainPage), null, NavigationType.FreshStart);
+            }
         }
 
         public bool AllowAppExit()
@@ -116,8 +135,24 @@ namespace GravitasApp
             return true;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (_currentState == null)
+                return;
+            else if (_currentState == "start" || _currentState == "failed")
+            {
+                SetButtonState("progress");
+                StatusCode code = await DataManager.RefreshEventsAsync();
+                if (code == StatusCode.Success)
+                    SetButtonState("complete");
+                else
+                {
+                    SetButtonState("failed");
+                    await MessageDialogs.GetDialog(code).ShowAsync();
+                }
+            }
+            else if (_currentState == "complete")
+                PageManager.NavigateTo(typeof(MainPage), null, NavigationType.FreshStart);
         }
 
         private void SetButtonState(string state)
@@ -143,7 +178,23 @@ namespace GravitasApp
                     progressRing.IsActive = false;
                     displayButton.Background = new SolidColorBrush() { Color = new Windows.UI.Color() { R = 170, G = 10, B = 10, A = 170 } };
                     break;
+                case "refresh":
+                    displayButton.IsEnabled = false;
+                    progressRing.IsActive = true;
+                    break;
+                case "refreshDone":
+                    displayButton.IsEnabled = false;
+                    progressRing.IsActive = false;
+                    displayButton.Background = new SolidColorBrush() { Color = new Windows.UI.Color() { R = 80, G = 170, B = 80, A = 170 } };
+                    break;
+                case "refreshFail":
+                    displayButton.IsEnabled = false;
+                    progressRing.IsActive = false;
+                    displayButton.Background = new SolidColorBrush() { Color = new Windows.UI.Color() { R = 170, G = 10, B = 10, A = 170 } };
+                    break;
+
             }
+            _currentState = state;
             ButtonContent = _buttonContents[state];
         }
 

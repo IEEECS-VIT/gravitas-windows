@@ -78,12 +78,17 @@ namespace GravitasApp
 
         private void ShortlistButton_Click(object sender, RoutedEventArgs e)
         {
-
+            PageManager.NavigateTo(typeof(ShortlistPage), null, NavigationType.Default);
         }
 
         private void AboutButton_Click(object sender, RoutedEventArgs e)
         {
+            PageManager.NavigateTo(typeof(AboutPage), null, NavigationType.Default);
+        }
 
+        private void AllEventsButton_Click(object sender, RoutedEventArgs e)
+        {
+            PageManager.NavigateTo(typeof(EventBrowserPage), null, NavigationType.Default);
         }
 
     }

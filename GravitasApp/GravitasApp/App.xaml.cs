@@ -57,10 +57,9 @@ namespace GravitasApp
             }
 #endif
 
-            // Temporary Set-up (!)
-            await DataManager.LoadEventsAsync();
-            
+            await DataManager.TryLoadDataAsync();
             Frame rootFrame = Window.Current.Content as Frame;
+
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
@@ -72,7 +71,8 @@ namespace GravitasApp
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     // Do not restore session state if the last run session was long back.
-                    if ((DateTimeOffset.UtcNow - PageManager.LastSessionSavedDate).Hours <= 24)
+                    if ((DateTimeOffset.UtcNow - PageManager.LastSessionSavedDate).Hours <= 12
+                        && DataManager.ContentReady == true)
                     {
                         bool restoreResult = await PageManager.TryRestoreState();
                         if (restoreResult == false)
@@ -100,7 +100,7 @@ namespace GravitasApp
                 rootFrame.Navigated += this.RootFrame_FirstNavigated;
 
                 // Navigate to the desired page.
-                PageManager.NavigateTo(typeof(EventPage), null, NavigationType.FreshStart);
+                PageManager.NavigateTo(typeof(IntroPage), null, NavigationType.FreshStart);
             }
 
             // Ensure the current window is active
@@ -131,6 +131,7 @@ namespace GravitasApp
             var deferral = e.SuspendingOperation.GetDeferral();
 
             await PageManager.SaveSessionState();
+            await DataManager.TrySaveChecklistsAsync();
 
             deferral.Complete();
         }

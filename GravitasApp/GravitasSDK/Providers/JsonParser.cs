@@ -22,7 +22,7 @@ namespace GravitasSDK.Providers
             }
         }
 
-        private void AssignStringList(JsonObject obj, string arrayKey, List<string> targetList)
+        private static void AssignStringList(JsonObject obj, string arrayKey, List<string> targetList)
         {
             if (obj.GetNamedValue(arrayKey).ValueType == JsonValueType.Null)
                 return;
@@ -31,52 +31,62 @@ namespace GravitasSDK.Providers
                 targetList.Add(val.GetString());
         }
 
-        public List<Event> GetEvents(string eventsJson)
+        public static Tuple<string, List<Event>> TryGetEvents(string eventsJson)
         {
-            List<Event> events = new List<Event>();
-            JsonArray eventsArray = JsonObject.Parse(eventsJson).GetNamedArray("details");
-
-            foreach (JsonValue item in eventsArray)
+            try
             {
-                Event e = new Event();
-                JsonObject eventObject = item.GetObject();
+                List<Event> events = new List<Event>();
+                JsonObject detailsObject = JsonObject.Parse(eventsJson).GetNamedObject("events");
+                JsonArray eventsArray = detailsObject.GetNamedArray("details");
 
-                e.Title = eventObject.GetNamedString("title");
-                e.Category = eventObject.GetNamedString("category");
-                e.Description = eventObject.GetNamedString("description");
-
-                AssignStringList(eventObject, "chapters", e._AssociatedChapters);
-                AssignStringList(eventObject, "emails", e._Emails);
-                AssignStringList(eventObject, "fees", e._FeesInfo);
-                AssignStringList(eventObject, "team_sizes", e._TeamSizes);
-
-                if (eventObject.GetNamedValue("coordinators").ValueType != null)
+                foreach (JsonValue item in eventsArray)
                 {
-                    foreach (JsonValue val in eventObject.GetNamedArray("coordinators"))
+                    Event e = new Event();
+                    JsonObject eventObject = item.GetObject();
+
+                    e.Title = eventObject.GetNamedString("title");
+                    e.Category = eventObject.GetNamedString("category");
+                    if (eventObject.GetNamedValue("description").ValueType != JsonValueType.Null)
+                        e.Description = eventObject.GetNamedString("description");
+                    else
+                        e.Description = null;
+
+                    AssignStringList(eventObject, "chapters", e._AssociatedChapters);
+                    AssignStringList(eventObject, "emails", e._Emails);
+                    AssignStringList(eventObject, "fees", e._FeesInfo);
+                    AssignStringList(eventObject, "team_sizes", e._TeamSizes);
+
+                    if (eventObject.GetNamedValue("coordinators").ValueType != JsonValueType.Null)
                     {
-                        JsonObject cObj = val.GetObject();
-                        e._Coordinators.Add(new Coordinator(cObj.GetNamedString("name"), cObj.GetNamedString("phone")));
+                        foreach (JsonValue val in eventObject.GetNamedArray("coordinators"))
+                        {
+                            JsonObject cObj = val.GetObject();
+                            e._Coordinators.Add(new Coordinator(cObj.GetNamedString("name"), cObj.GetNamedString("phone")));
+                        }
                     }
+
+                    if (eventObject.GetNamedValue("prizes").ValueType != JsonValueType.Null)
+                    {
+                        foreach (JsonValue val in eventObject.GetNamedArray("prizes"))
+                        {
+                            JsonObject cObj = val.GetObject();
+                            e._PrizesInfo.Add(new Tuple<string, ulong>(cObj.GetNamedString("tag"), (ulong)(cObj.GetNamedNumber("prize"))));
+                        }
+                    }
+
+                    if (eventObject.GetNamedValue("venue").ValueType != JsonValueType.Null)
+                        e.Venue = eventObject.GetNamedString("venue");
+
+                    // Timings/Dates are pending
+
+                    events.Add(e);
                 }
 
-                if (eventObject.GetNamedValue("prizes").ValueType != null)
-                {
-                    foreach (JsonValue val in eventObject.GetNamedArray("prizes"))
-                    {
-                        JsonObject cObj = val.GetObject();
-                        e._PrizesInfo.Add(new Tuple<string, ulong>(cObj.GetNamedString("tag"), (ulong)(cObj.GetNamedNumber("prize"))));
-                    }
-                }
-
-                if (eventObject.GetNamedValue("venue").ValueType != JsonValueType.Null)
-                    e.Venue = eventObject.GetNamedString("venue");
-
-                // Timings/Dates are pending
-
-                events.Add(e);
+                string version = detailsObject.GetNamedString("data_version");
+                return new Tuple<string, List<Event>>(version, events);
             }
-
-            return events;
+            catch
+            { return null; }
         }
 
     }

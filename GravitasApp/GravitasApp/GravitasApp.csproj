@@ -95,6 +95,8 @@
       <DependentUpon>FilterPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CategoryMetadata.cs" />
+    <Compile Include="Helpers\MessageDialogs.cs" />
+    <Compile Include="Helpers\ReplacementContent.cs" />
     <Compile Include="Helpers\ViewDependencies.cs" />
     <Compile Include="IntroPage.xaml.cs">
       <DependentUpon>IntroPage.xaml</DependentUpon>
@@ -165,7 +167,6 @@
     <Content Include="Assets\Gravitas\school.png" />
     <Content Include="Assets\Gravitas\SplashScreen.png" />
     <Content Include="Assets\Gravitas\workshop.png" />
-    <Content Include="Events.xml" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

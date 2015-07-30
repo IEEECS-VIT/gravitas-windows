@@ -30,7 +30,15 @@ namespace GravitasSDK.Providers
         /// <summary>
         /// An unknown error occured.
         /// </summary>
-        UnknownError = 4
+        UnknownError = 4,
+        /// <summary>
+        /// Occurs if the file or content is missing.
+        /// </summary>
+        NoData = 5,
+        /// <summary>
+        /// The service provider is busy.
+        /// </summary>
+        Busy = 6
     }
 
     /// <summary>
