@@ -59,7 +59,7 @@ namespace GravitasApp.Managers
         public static async Task LoadEventsAsync()
         {
             StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Events.xml"));
-            EventList = (await ContentSerializer.ParseEventsAsync(file)).ToList();
+            EventList = (await ContentManager.ParseEventsAsync(file)).ToList();
             _filterList.GenerateChecklist(_eventList);
         }
 

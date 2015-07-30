@@ -87,6 +87,9 @@
     <Compile Include="DataModel\Filter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ContentSerializer.cs" />
+    <Compile Include="Providers\JsonParser.cs" />
+    <Compile Include="Providers\NetworkService.cs" />
+    <Compile Include="Providers\ServiceResponse.cs" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

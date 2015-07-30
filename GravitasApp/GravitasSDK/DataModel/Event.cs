@@ -8,35 +8,35 @@ using System.Text;
 
 namespace GravitasSDK.DataModel
 {
-    [DataContract]
     public class Event
     {
 
-        #region Fields and Properties
+        #region Private and Internal Properties
 
-        [DataMember]
-        private List<uint> _prizes;
-        [DataMember]
-        private List<Coordinator> _coordinators;
+        internal List<Tuple<string, ulong>> _PrizesInfo { get; private set; }
+        internal List<string> _FeesInfo { get; private set; }
+        internal List<string> _TeamSizes { get; private set; }
 
-        [DataMember]
-        public string Title { get; private set; }
-        [DataMember]
-        public string Category { get; private set; }
-        [DataMember]
-        public string Description { get; private set; }
-        [DataMember]
-        public uint RegistrationFees { get; private set; }
-        [DataMember]
-        public string Venue { get; private set; }
-        public ReadOnlyCollection<uint> Prizes { get; private set; }
-        [DataMember]
-        public DateTimeOffset StartTime { get; private set; }
-        [DataMember]
-        public DateTimeOffset EndTime { get; private set; }
+        internal List<string> _AssociatedChapters { get; private set; }
+        internal List<Coordinator> _Coordinators { get; private set; }
+        internal List<string> _Emails { get; private set; }
+
+        #endregion
+
+        #region Public Properties
+
+        public string Title { get; internal set; }
+        public string Category { get; internal set; }
+        public string Description { get; internal set; }
+        public string Venue { get; internal set; }
+
+        public ReadOnlyCollection<string> TeamSizes { get; private set; }
+        public ReadOnlyCollection<Tuple<string, ulong>> PrizesInfo { get; private set; }
+        public ReadOnlyCollection<string> FeesInfo { get; private set; }
+
+        public ReadOnlyCollection<string> AssociatedChapters { get; private set; }
         public ReadOnlyCollection<Coordinator> Coordinators { get; private set; }
-        [DataMember]
-        public string MiscDetails { get; private set; }
+        public ReadOnlyCollection<string> Emails { get; private set; }
 
         #endregion
 
@@ -44,31 +44,29 @@ namespace GravitasSDK.DataModel
 
         public Event()
         {
-            _prizes = new List<uint>();
-            _coordinators = new List<Coordinator>();
-            SetUpViews(new StreamingContext());
-        }
+            _TeamSizes = new List<string>();
+            _PrizesInfo = new List<Tuple<string, ulong>>();
+            _FeesInfo = new List<string>();
 
-        #endregion
+            _AssociatedChapters = new List<string>();
+            _Coordinators = new List<Coordinator>();
+            _Emails = new List<string>();
 
-        #region Serialization Hooks
+            TeamSizes = new ReadOnlyCollection<string>(_TeamSizes);
+            PrizesInfo = new ReadOnlyCollection<Tuple<string, ulong>>(_PrizesInfo);
+            FeesInfo = new ReadOnlyCollection<string>(_FeesInfo);
 
-        [OnDeserialized]
-        private void SetUpViews(StreamingContext sc)
-        {
-            Prizes = new ReadOnlyCollection<uint>(_prizes);
-            Coordinators = new ReadOnlyCollection<Coordinator>(_coordinators);
+            AssociatedChapters = new ReadOnlyCollection<string>(_AssociatedChapters);
+            Coordinators = new ReadOnlyCollection<Coordinator>(_Coordinators);
+            Emails = new ReadOnlyCollection<string>(_Emails);
         }
 
         #endregion
     }
 
-    [DataContract]
     public class Coordinator
     {
-        [DataMember]
         private readonly string _name;
-        [DataMember]
         private readonly string _phone;
 
         public string Name

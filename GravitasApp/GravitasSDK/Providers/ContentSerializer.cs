@@ -12,19 +12,19 @@ using System.Xml;
 
 namespace GravitasSDK.Providers
 {
-    public static class ContentSerializer
+    public static class ContentManager
     {
 
         #region Public Methods (API)
 
-        public static async Task<bool> TryWriteEventsAsync(StorageFile outFile, IEnumerable<Event> events)
+        public static async Task<bool> TryWriteEventsJsonAsync(StorageFile outFile, string eventsJson)
         {
-            return await TryWriteAsync(outFile, events);
+            return await TryWriteAsync(outFile, eventsJson);
         }
 
-        public static async Task<IEnumerable<Event>> ParseEventsAsync(StorageFile inputFile)
+        public static async Task<string> GetEventsJsonAsync(StorageFile inputFile)
         {
-            return await DeserializeContent<IEnumerable<Event>>(inputFile);
+            return await TryReadAsync(inputFile);
         }
 
         public static async Task<bool> TrySaveChecklistsAsync<T>(StorageFile outFile, FilterCriteria<T> filterCriteria)
@@ -87,47 +87,31 @@ namespace GravitasSDK.Providers
             writer.WriteWhitespace("\r\n");
         }
 
-        private static async Task<bool> TryWriteAsync(StorageFile outFile, object contentGraph)
+        private static async Task<bool> TryWriteAsync(StorageFile outFile, string content)
         {
-            Stream writeStream = null;
             bool result;
             try
             {
-                DataContractSerializer ser = new DataContractSerializer(contentGraph.GetType());
-                writeStream = await outFile.OpenStreamForWriteAsync();
-                ser.WriteObject(writeStream, contentGraph);
+                await FileIO.WriteTextAsync(outFile, content);
                 result = true;
             }
             catch
             {
                 result = false;
             }
-            finally
-            {
-                if (writeStream != null)
-                    writeStream.Dispose();
-            }
             return result;
         }
 
-        private static async Task<T> DeserializeContent<T>(StorageFile inputFile)
+        private static async Task<string> TryReadAsync(StorageFile inputFile)
         {
-            Stream readStream = null;
             try
             {
-                DataContractSerializer ser = new DataContractSerializer(typeof(T));
-                readStream = await inputFile.OpenStreamForReadAsync();
-                T content = (T)ser.ReadObject(readStream);
-                return content;
+                string s = await FileIO.ReadTextAsync(inputFile);
+                return s;
             }
             catch
             {
-                return default(T);
-            }
-            finally
-            {
-                if (readStream != null)
-                    readStream.Dispose();
+                return null;
             }
         }
 

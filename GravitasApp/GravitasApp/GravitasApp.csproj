@@ -117,6 +117,32 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\ChapterLogos\ASCE-VIT.png" />
+    <Content Include="Assets\ChapterLogos\cclogo.png" />
+    <Content Include="Assets\ChapterLogos\cclogo1.png" />
+    <Content Include="Assets\ChapterLogos\CSI Logo.png" />
+    <Content Include="Assets\ChapterLogos\huawei.png" />
+    <Content Include="Assets\ChapterLogos\IEEE EMBS logo.png" />
+    <Content Include="Assets\ChapterLogos\IEEE-mtts_LOGO.png" />
+    <Content Include="Assets\ChapterLogos\IEEE-PES.png" />
+    <Content Include="Assets\ChapterLogos\ieee-wie.png" />
+    <Content Include="Assets\ChapterLogos\IEEE.png" />
+    <Content Include="Assets\ChapterLogos\ieeecslogo.png" />
+    <Content Include="Assets\ChapterLogos\ieee_pcs_logo.png" />
+    <Content Include="Assets\ChapterLogos\iei logo.png" />
+    <Content Include="Assets\ChapterLogos\IETElogo.png" />
+    <Content Include="Assets\ChapterLogos\IET_MASTER_LOGO.png" />
+    <Content Include="Assets\ChapterLogos\isa logo.png" />
+    <Content Include="Assets\ChapterLogos\logo npss.png" />
+    <Content Include="Assets\ChapterLogos\sa-best.png" />
+    <Content Include="Assets\ChapterLogos\sae logo.png" />
+    <Content Include="Assets\ChapterLogos\SEDS Logo.png" />
+    <Content Include="Assets\ChapterLogos\smcelogo.png" />
+    <Content Include="Assets\ChapterLogos\TAG_gravitas.png" />
+    <Content Include="Assets\ChapterLogos\the_hinduEducation_plus.png" />
+    <Content Include="Assets\ChapterLogos\VAC Logo.png" />
+    <Content Include="Assets\ChapterLogos\VIT Spartans Logo.png" />
+    <Content Include="Assets\ChapterLogos\yrc logo1.png" />
     <Content Include="Assets\Gravitas\appliedengineering.png" />
     <Content Include="Assets\Gravitas\builtrix.png" />
     <Content Include="Assets\Gravitas\circuitrix.png" />
@@ -181,9 +207,7 @@
       <Name>GravitasSDK</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets\ChapterLogos\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
