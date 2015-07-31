@@ -123,7 +123,7 @@ namespace GravitasApp.Helpers
             _infoList.Add(new CategoryMetadata(
                 "WORKSHOPS",
                 "",
-                Colors.Sienna, "workshops"));
+                Colors.DarkTurquoise, "workshops"));
         }
 
         public static CategoryMetadata GetMetadata(string categoryName)

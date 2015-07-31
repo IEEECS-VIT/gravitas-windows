@@ -8,10 +8,10 @@
     mc:Ignorable="d">
 
     <Page.Background>
-        <ImageBrush ImageSource="ms-appx:///Assets/Gravitas/SplashScreen.png" Stretch="UniformToFill"></ImageBrush>
+        <ImageBrush ImageSource="ms-appx:///Assets/Gravitas/HubBackground.png" Stretch="UniformToFill"></ImageBrush>
     </Page.Background>
     
-    <Grid Margin="19,10,19,0">
+    <Grid Margin="19,20,19,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -25,7 +25,7 @@
             </Viewbox>
         </StackPanel>
         <StackPanel Grid.Row="1">
-        <TextBlock Text="SEP 25 - SEP 27" HorizontalAlignment="Center"
+        <TextBlock Text="SEP 25 - SEP 27" HorizontalAlignment="Center" Foreground="Gold"
                    Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
             <TextBlock Text="VIT University, Vellore" HorizontalAlignment="Center" Style="{StaticResource ControlHeaderTextBlockStyle}"></TextBlock>
         </StackPanel>

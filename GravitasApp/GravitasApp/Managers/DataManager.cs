@@ -178,7 +178,6 @@ namespace GravitasApp.Managers
 
         public static Event TryGetEvent(string eventTitle)
         {
-            // Change to binary search in future.
             Event ev = _eventList.Find((e) => e.Title == eventTitle);
             return ev;
         }

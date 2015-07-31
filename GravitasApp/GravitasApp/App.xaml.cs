@@ -102,7 +102,7 @@ namespace GravitasApp
                 rootFrame.Navigated += this.RootFrame_FirstNavigated;
 
                 // Navigate to the desired page.
-                PageManager.NavigateTo(typeof(MainPage), null, NavigationType.FreshStart);
+                PageManager.NavigateTo(typeof(IntroPage), null, NavigationType.FreshStart);
             }
 
             // Ensure the current window is active

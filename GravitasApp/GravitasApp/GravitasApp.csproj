@@ -118,6 +118,12 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\AppLogos\SplashScreen.scale-240.png" />
+    <Content Include="Assets\AppLogos\Logo.scale-240.png" />
+    <Content Include="Assets\AppLogos\SmallLogo.scale-240.png" />
+    <Content Include="Assets\AppLogos\Square71x71Logo.scale-240.png" />
+    <Content Include="Assets\AppLogos\StoreLogo.scale-240.png" />
+    <Content Include="Assets\AppLogos\WideLogo.scale-240.png" />
     <Content Include="Assets\ChapterLogos\acm.png" />
     <Content Include="Assets\ChapterLogos\aiche.png" />
     <Content Include="Assets\ChapterLogos\asce.png" />
@@ -168,12 +174,6 @@
     <Content Include="Assets\Gravitas\bioxyn.png" />
     <Content Include="Assets\Gravitas\bitsandbytes.png" />
     <Content Include="Assets\Gravitas\GravitasTitle.png" />
-    <Content Include="Assets\AppLogos\Logo.scale-240.png" />
-    <Content Include="Assets\AppLogos\SmallLogo.scale-240.png" />
-    <Content Include="Assets\AppLogos\SplashScreen.scale-240.png" />
-    <Content Include="Assets\AppLogos\Square71x71Logo.scale-240.png" />
-    <Content Include="Assets\AppLogos\StoreLogo.scale-240.png" />
-    <Content Include="Assets\AppLogos\WideLogo.scale-240.png" />
     <Content Include="Assets\Gravitas\HubBackground.png" />
     <Content Include="Assets\Gravitas\informals.png" />
     <Content Include="Assets\Gravitas\isobadge.png" />
