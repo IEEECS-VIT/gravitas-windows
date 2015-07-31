@@ -96,7 +96,6 @@
     </Compile>
     <Compile Include="Helpers\CategoryMetadata.cs" />
     <Compile Include="Helpers\MessageDialogs.cs" />
-    <Compile Include="Helpers\ReplacementContent.cs" />
     <Compile Include="Helpers\ViewDependencies.cs" />
     <Compile Include="IntroPage.xaml.cs">
       <DependentUpon>IntroPage.xaml</DependentUpon>
@@ -177,6 +176,7 @@
     <Content Include="Assets\AppLogos\WideLogo.scale-240.png" />
     <Content Include="Assets\Gravitas\HubBackground.png" />
     <Content Include="Assets\Gravitas\informals.png" />
+    <Content Include="Assets\Gravitas\isobadge.png" />
     <Content Include="Assets\Gravitas\premium.png" />
     <Content Include="Assets\Gravitas\management.png" />
     <Content Include="Assets\Gravitas\online.png" />
@@ -186,6 +186,7 @@
     <Content Include="Assets\Gravitas\SplashScreen.png" />
     <Content Include="Assets\Gravitas\workshop.png" />
     <Content Include="Assets\Gravitas\workshops.png" />
+    <Content Include="Assets\Gravitas\vitbadge.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

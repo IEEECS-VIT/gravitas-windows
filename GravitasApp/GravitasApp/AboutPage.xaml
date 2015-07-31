@@ -8,8 +8,137 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Pivot>
+        <Pivot.HeaderTemplate>
+            <DataTemplate>
+                <TextBlock Margin="0" FontSize="{StaticResource PageHeaderFontSize}" Text="{Binding}"></TextBlock>
+            </DataTemplate>
+        </Pivot.HeaderTemplate>
+        <PivotItem Header="about gravitas">
+            <ScrollViewer>
+                <StackPanel Margin="0,0,0,17">
+                    <TextBlock Style="{StaticResource BodyTextBlockStyle}">
+                        graVITas is a tech fest organized every year by VIT University, Vellore in the month of September. The theme for gravitas 2015 is<LineBreak></LineBreak><Run FontWeight="Bold" Text="DESIGN.CREATE.PATENT."></Run>
+                    </TextBlock>
+                    
+                    <TextBlock Margin="0,20,0,0" Text="For any queries or feedback about gravitas, do contact us:" Style="{StaticResource MessageDialogContentStyle}" Foreground="{ThemeResource PhoneMidBrush}"></TextBlock>
+                    
+                    <ListView ItemsSource="{Binding Contacts}" Margin="0,17,0,0" IsItemClickEnabled="False">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                                <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,0,0,17">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Background="{ThemeResource PhoneChromeBrush}" Width="60" Height="60" Margin="0,3,10,0" VerticalAlignment="Top">
+                                        <Viewbox Stretch="Uniform" Margin="7">
+                                        <SymbolIcon Symbol="Contact" Foreground="WhiteSmoke"></SymbolIcon>
+                                        </Viewbox>
+                                    </Border>
+                                    <StackPanel Grid.Column="1">
+                                    <TextBlock Text="{Binding Item1}" Style="{StaticResource ControlHeaderTextBlockStyle}"></TextBlock>
+                                        <TextBlock Text="{Binding Item2}" Style="{StaticResource MessageDialogTitleStyle}"  FontWeight="Normal"></TextBlock>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <HyperlinkButton Content="call mobile" Foreground="{ThemeResource PhoneAccentBrush}" FontSize="20" Padding="0" Click="CallButton_Click"></HyperlinkButton>
+                                            <HyperlinkButton Content="send email" Foreground="{ThemeResource PhoneAccentBrush}" FontSize="20" Grid.Column="1" Padding="0" HorizontalAlignment="Right" Click="EmailButton_Click"></HyperlinkButton>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
 
-    </Grid>
-    
+                    <Grid Margin="0,30,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="1" Background="White" Padding="3">
+                            <Image Source="ms-appx:///Assets/Gravitas/vitbadge.png" Stretch="Uniform"></Image>
+                        </Border>
+                        <Border Grid.Column="3" Padding="5" Background="White">
+                            <Image Source="ms-appx:///Assets/Gravitas/isoBadge.png" Stretch="Uniform"></Image>
+                        </Border>
+                        <Border Grid.ColumnSpan="5">
+                            <Border.Background>
+                                <SolidColorBrush Color="#10000000"></SolidColorBrush>
+                            </Border.Background>
+                        </Border>
+                    </Grid>
+
+                </StackPanel>
+            </ScrollViewer>
+        </PivotItem>
+        
+        <PivotItem Header="app feedback">
+            <ScrollViewer>
+                <StackPanel>
+                    <TextBlock Text="The official graVITas 2015 app for Windows. This app was developed by:" Style="{StaticResource BodyTextBlockStyle}"></TextBlock>
+                    
+                    <ListView Margin="0,10,0,0">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Viewbox Height="30" Width="30" Stretch="Uniform">
+                                        <SymbolIcon Symbol="Contact"></SymbolIcon>
+                                    </Viewbox>
+                                    <TextBlock Margin="10,0,0,0" Grid.Column="1" Text="{Binding}" Style="{StaticResource GroupHeaderTextBlockStyle}" TextLineBounds="Tight" VerticalAlignment="Center"></TextBlock>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <x:String>Vinay Gupta</x:String>
+                        <x:String>Sukriti Sinha</x:String>
+                        <x:String>Ayush Agarwal</x:String>
+                    </ListView>
+
+                    <StackPanel Margin="0,17,0,0">
+                        <StackPanel.Resources>
+                            <Style TargetType="TextBlock" x:Key="ItemHeaderStyle" BasedOn="{StaticResource GroupHeaderTextBlockStyle}">
+                                <Setter Property="Foreground" Value="{ThemeResource PhoneAccentBrush}"></Setter>
+                            </Style>
+                            <Style TargetType="TextBlock" x:Key="ItemContentStyle" BasedOn="{StaticResource BodyTextBlockStyle}">
+                                <Setter Property="Foreground" Value="Silver"></Setter>
+                                <Setter Property="Margin" Value="0,7,0,3"></Setter>
+                            </Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Margin" Value="0,0,0,20"></Setter>
+                            </Style>
+                        </StackPanel.Resources>
+                        <TextBlock Text="feedback" Style="{StaticResource ItemHeaderStyle}"></TextBlock>
+                        <TextBlock Style="{StaticResource ItemContentStyle}">
+                            Have any query about the app? Send us a feedback mail.
+                        </TextBlock>
+                        <Button Content="email" Margin="0" Click="FeedbackButton_Click"></Button>
+                        <TextBlock Text="review" Style="{StaticResource ItemHeaderStyle}"></TextBlock>
+                        <TextBlock Style="{StaticResource ItemContentStyle}">
+                            Share the app with others or rate it on the store.
+                        </TextBlock>
+                        <Button Margin="0" Content="rate and review" Click="ReviewButton_Click"></Button>    
+                        <Button Content="share app" Click="ShareButton_Click"></Button>
+                    </StackPanel>
+
+                </StackPanel>
+            </ScrollViewer>
+        </PivotItem>
+        
+    </Pivot>
+
 </Page>

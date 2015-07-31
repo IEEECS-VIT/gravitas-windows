@@ -9,11 +9,19 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition>
+                <ContinuumNavigationTransitionInfo></ContinuumNavigationTransitionInfo>
+            </NavigationThemeTransition>
+        </TransitionCollection>
+    </Page.Transitions>
+    
     <Page.BottomAppBar>
         <CommandBar>
             <CommandBar.PrimaryCommands>
                 <AppBarToggleButton Icon="Favorite" Label="shortlist"></AppBarToggleButton>
-                <AppBarButton Icon="Phone" Label="contact"></AppBarButton>
+                <AppBarButton Icon="Phone" Label="contact" Click="ContactButton_Click"></AppBarButton>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
@@ -40,6 +48,34 @@
                 </StackPanel>
             </Flyout>
             
+            <PickerFlyout x:Name="contactPickerFlyout" ConfirmationButtonsVisible="False" Placement="Full">
+                <PickerFlyout.Content>
+                    <StackPanel>
+                        <TextBlock Text="CHOOSE A CONTACT METHOD" Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
+                        <ListView ItemsSource="{Binding ContextEvent.Coordinators}" ItemClick="CoordinatorItem_Click" IsItemClickEnabled="True">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Margin="0,23,0,0">
+                                        <TextBlock Text="{Binding Name}" Style="{StaticResource ListViewItemTextBlockStyle}"></TextBlock>
+                                        <TextBlock Text="{Binding Phone}" Style="{StaticResource BodyTextBlockStyle}" Foreground="{ThemeResource PhoneAccentBrush}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <ListView ItemsSource="{Binding ContextEvent.Emails}" ItemClick="EmailItem_Click" IsItemClickEnabled="True">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Margin="0,23,0,0">
+                                        <TextBlock Text="email" Style="{StaticResource ListViewItemTextBlockStyle}"></TextBlock>
+                                        <TextBlock Text="{Binding}" Style="{StaticResource BodyTextBlockStyle}" Foreground="{ThemeResource PhoneAccentBrush}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
+                </PickerFlyout.Content>
+            </PickerFlyout>
+            
         </ResourceDictionary>
     </Page.Resources>
 
@@ -63,7 +99,8 @@
         
         <ScrollViewer>
             <StackPanel Margin="19,19,19,0">
-                <TextBlock Text="{Binding ContextEvent.Title}" Style="{StaticResource MessageDialogTitleStyle}" FontSize="27" MaxLines="0" TextWrapping="WrapWholeWords"></TextBlock>
+                <TextBlock Text="{Binding ContextEvent.Title}" Style="{StaticResource MessageDialogTitleStyle}" FontSize="27" MaxLines="0" TextWrapping="WrapWholeWords"
+                           ContinuumNavigationTransitionInfo.IsEntranceElement="True"></TextBlock>
                 <TextBlock Text="{Binding CategoryInfo.Name}" Style="{StaticResource TitleTextBlockStyle}" Foreground="{Binding CategoryInfo.LabelBrush}" Margin="0,3,0,0"></TextBlock>
 
                 <Grid Margin="0,35,0,0">

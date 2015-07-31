@@ -11,6 +11,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.System;
+using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -19,15 +20,15 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.ApplicationModel.Calls;
+using Windows.ApplicationModel.Email;
 
 
 namespace GravitasApp
 {
 
-    public sealed partial class EventPage : Page, IManageable, INotifyPropertyChanged
+    public sealed partial class EventPage : Page, IManageable
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public CategoryMetadata CategoryInfo { get; private set; }
         public Event ContextEvent { get; private set; }
         public Visibility TeamSizePopupButtonVisibility { get; private set; }
@@ -96,6 +97,32 @@ namespace GravitasApp
         private async void ReadMoreButton_Click(object sender, RoutedEventArgs e)
         {
             await Launcher.LaunchUriAsync(new Uri(CategoryInfo.WebLink));
+        }
+
+        private async void ContactButton_Click(object sender, RoutedEventArgs e)
+        {
+            if ((ContextEvent.Emails.Count + ContextEvent.Coordinators.Count) == 0)
+            {
+                await new MessageDialog("Sorry, there are no contact options for the organizers of this event.", "Sorry").ShowAsync();
+                return;
+            }
+
+            contactPickerFlyout.ShowAt(this as FrameworkElement);
+        }
+
+        private void CoordinatorItem_Click(object sender, ItemClickEventArgs e)
+        {
+            Coordinator c = e.ClickedItem as Coordinator;
+            PhoneCallManager.ShowPhoneCallUI(c.Phone, c.Name);
+        }
+
+        private async void EmailItem_Click(object sender, ItemClickEventArgs e)
+        {
+            string email = e.ClickedItem as string;
+            EmailMessage mailMsg = new EmailMessage();
+            mailMsg.To.Add(new EmailRecipient(email));
+            mailMsg.Subject = "Query - " + ContextEvent.Title;
+            await EmailManager.ShowComposeNewEmailAsync(mailMsg);
         }
     }
 }

@@ -108,7 +108,7 @@ namespace GravitasApp.Managers
             FilterList.Add(new FilterCriterion<Event, string>((e) =>
             {
                 if (e.TeamSizes.Count == 0)
-                    return ReplacementContent.TeamSize;
+                    return "NA";
                 else
                 {
                     int x;

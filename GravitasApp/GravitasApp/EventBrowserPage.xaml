@@ -16,7 +16,6 @@
             <AppBarButton Icon="Favorite" Label="my shortlist"></AppBarButton>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="feedback"></AppBarButton>
                 <AppBarButton Label="about" Click="AboutButton_Click"></AppBarButton>
             </CommandBar.SecondaryCommands>
         </CommandBar>
@@ -51,36 +50,37 @@
                 <SymbolIcon Symbol="Cancel"></SymbolIcon>
             </HyperlinkButton.Content>
         </HyperlinkButton>
-        
-        <ScrollViewer Grid.Row="3" HorizontalScrollMode="Disabled">
-            <ListView ItemsSource="{Binding SelectedEvents, Mode=OneWay}" x:Name="eventListView"
-                      IsItemClickEnabled="True" ItemClick="ListView_ItemClick">
-                <ListView.Resources>
-                    <helpers:CategoryToBrushConverter x:Key="CategoryToBrushConverter"></helpers:CategoryToBrushConverter>
-                </ListView.Resources>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Margin="0,0,0,10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Ellipse Width="40" Height="40" StrokeThickness="0" Fill="{Binding Category, Converter={StaticResource CategoryToBrushConverter}}"
-                                     VerticalAlignment="Center" Margin="0,0,13,0"></Ellipse>
-                            <StackPanel Grid.Column="1">
-                                <TextBlock Text="{Binding Title}" Style="{StaticResource ListViewItemTextBlockStyle}"></TextBlock>
-                                <TextBlock Text="{Binding Category}" Typography.CaseSensitiveForms="False" Foreground="{Binding Category, Converter={StaticResource CategoryToBrushConverter}}"
-                                           Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
-                                <TextBlock Style="{StaticResource ControlHeaderTextBlockStyle}">
-                                    <Run Text="team size:"></Run> <Run Text="{Binding TeamSizes, Converter={StaticResource ListToStringConverter}, ConverterParameter='NA;options'}"></Run>
-                                </TextBlock>
-                            </StackPanel>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </ScrollViewer>
-        
+
+        <ListView ContinuumNavigationTransitionInfo.ExitElementContainer="True" ItemsSource="{Binding SelectedEvents, Mode=OneWay}" x:Name="eventListView"
+                      Grid.Row="3" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" ScrollViewer.HorizontalScrollMode="Disabled">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.Resources>
+                <helpers:CategoryToBrushConverter x:Key="CategoryToBrushConverter"></helpers:CategoryToBrushConverter>
+            </ListView.Resources>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="0,0,0,10">
+                        <TextBlock Text="{Binding Title}" Style="{StaticResource ListViewItemTextBlockStyle}"
+                                   ContinuumNavigationTransitionInfo.IsExitElement="True"></TextBlock>
+                        <TextBlock Text="{Binding Category}" Foreground="{Binding Category, Converter={StaticResource CategoryToBrushConverter}}"
+                                   Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
+                        <TextBlock Style="{StaticResource ControlHeaderTextBlockStyle}">
+                            <TextBlock.Transitions>
+                                <TransitionCollection>
+                                    <ContentThemeTransition></ContentThemeTransition>
+                                </TransitionCollection>
+                            </TextBlock.Transitions>
+                                        <Run Text="team size:"></Run> <Run Text="{Binding TeamSizes, Converter={StaticResource ListToStringConverter}, ConverterParameter='NA;options'}"></Run>
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
         <TextBlock Text="No results found" Style="{StaticResource GroupHeaderTextBlockStyle}"
                    Grid.Row="3" Margin="0,10,0,0" Visibility="{ Binding SelectedEvents, Mode=OneWay, Converter={StaticResource ListToVisibilityConverter}}"></TextBlock>
         

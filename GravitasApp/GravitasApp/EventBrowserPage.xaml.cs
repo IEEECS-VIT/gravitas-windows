@@ -181,7 +181,7 @@ namespace GravitasApp
 
         private void AboutButton_Click(object sender, RoutedEventArgs e)
         {
-
+            PageManager.NavigateTo(typeof(AboutPage), null, NavigationType.Default);
         }
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)

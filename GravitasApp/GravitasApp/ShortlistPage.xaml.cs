@@ -39,17 +39,16 @@ namespace GravitasApp
 
         public Dictionary<string, object> SaveState()
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         public void LoadState(Dictionary<string, object> lastState)
         {
-            throw new NotImplementedException();
         }
 
         public bool AllowAppExit()
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }
