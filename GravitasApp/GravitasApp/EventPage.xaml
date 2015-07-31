@@ -20,7 +20,7 @@
     <Page.BottomAppBar>
         <CommandBar>
             <CommandBar.PrimaryCommands>
-                <AppBarToggleButton Icon="Favorite" Label="shortlist"></AppBarToggleButton>
+                <AppBarToggleButton Icon="Favorite" Label="shortlist" Click="ShortlistButton_Click" x:Name="shortlistButton"></AppBarToggleButton>
                 <AppBarButton Icon="Phone" Label="contact" Click="ContactButton_Click"></AppBarButton>
             </CommandBar.PrimaryCommands>
         </CommandBar>
@@ -51,7 +51,7 @@
             <PickerFlyout x:Name="contactPickerFlyout" ConfirmationButtonsVisible="False" Placement="Full">
                 <PickerFlyout.Content>
                     <StackPanel>
-                        <TextBlock Text="CHOOSE A CONTACT METHOD" Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
+                        <TextBlock Text="CONTACT THE COORDINATORS" Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
                         <ListView ItemsSource="{Binding ContextEvent.Coordinators}" ItemClick="CoordinatorItem_Click" IsItemClickEnabled="True">
                             <ListView.ItemTemplate>
                                 <DataTemplate>

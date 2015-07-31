@@ -8,6 +8,18 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.BottomAppBar>
+        <CommandBar Background="{StaticResource CommandBarBackgroundBrush}">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Icon="Home" Label="home page" Click="HomePageButton_Click"></AppBarButton>
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="clear shortlist" Click="ClearButton_Click"></AppBarButton>
+                <AppBarButton Label="about" Click="AboutButton_Click"></AppBarButton>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -23,17 +35,32 @@
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
             <Viewbox Width="35" Height="35" Margin="0,0,7,0" 
-                             VerticalAlignment="Center" HorizontalAlignment="Center">
+                     VerticalAlignment="Center" HorizontalAlignment="Center">
                 <SymbolIcon Symbol="Favorite"></SymbolIcon>
             </Viewbox>
             <TextBlock Text="shortlist" Grid.Column="1"
-                               Style="{StaticResource PageHeaderTextBlockStyle}"></TextBlock>
+                       Style="{StaticResource PageHeaderTextBlockStyle}"></TextBlock>
         </Grid>
 
-        <Grid Grid.Row="1" Margin="19,17,19,0">
-            <TextBlock Text="You have not yet shortlisted any events." Visibility="{Binding Converter={StaticResource ListToVisibilityConverter}}"
+        <StackPanel Grid.Row="1" Margin="19,17,19,0">
+            <TextBlock Text="You have no shortlisted events. To star an event, go to its details page." Visibility="{Binding ShortlistedEventsInfo, Converter={StaticResource ListToVisibilityConverter}}"
                        Style="{StaticResource GroupHeaderTextBlockStyle}"></TextBlock>
-        </Grid>
+            <TextBlock Text="Events that you've shortlisted. Tap on an event to see its details."
+                       Style="{StaticResource GroupHeaderTextBlockStyle}" Visibility="{Binding ListHeaderVisiblity}"></TextBlock>
+            <ListView ItemsSource="{Binding ShortlistedEventsInfo}" Margin="0,20,0,0"
+                      ItemClick="ListView_ItemClick" IsItemClickEnabled="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="0,0,0,13">
+                            <TextBlock Text="{Binding Item1.Title}" Style="{StaticResource ListViewItemTextBlockStyle}"
+                                   ContinuumNavigationTransitionInfo.IsExitElement="True"></TextBlock>
+                            <TextBlock Text="{Binding Item2.Name}" Foreground="{Binding Item2.LabelBrush}"
+                                   Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
         
     </Grid>
     

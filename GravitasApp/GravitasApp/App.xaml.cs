@@ -133,7 +133,7 @@ namespace GravitasApp
             var deferral = e.SuspendingOperation.GetDeferral();
 
             await PageManager.SaveSessionState();
-            await DataManager.TrySaveChecklistsAsync();
+            await DataManager.TrySaveDataAsync();
 
             deferral.Complete();
         }

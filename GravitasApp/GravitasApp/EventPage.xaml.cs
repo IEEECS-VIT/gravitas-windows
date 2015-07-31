@@ -66,6 +66,7 @@ namespace GravitasApp
                         break;
                     ChapterImages.Add(new Uri(String.Format("ms-appx:///Assets/ChapterLogos/{0}.png", chapter.Replace(" ", ""))));
                 }
+                shortlistButton.IsChecked = DataManager.IsShortlisted(ContextEvent);
                 this.DataContext = this;
             }
         }
@@ -103,7 +104,7 @@ namespace GravitasApp
         {
             if ((ContextEvent.Emails.Count + ContextEvent.Coordinators.Count) == 0)
             {
-                await new MessageDialog("Sorry, there are no contact options for the organizers of this event.", "Sorry").ShowAsync();
+                await new MessageDialog("There are no contact options for the organizers of this event.", "Sorry").ShowAsync();
                 return;
             }
 
@@ -123,6 +124,11 @@ namespace GravitasApp
             mailMsg.To.Add(new EmailRecipient(email));
             mailMsg.Subject = "Query - " + ContextEvent.Title;
             await EmailManager.ShowComposeNewEmailAsync(mailMsg);
+        }
+
+        private void ShortlistButton_Click(object sender, RoutedEventArgs e)
+        {
+            DataManager.UpdateShortlist(ContextEvent, (bool)shortlistButton.IsChecked);
         }
     }
 }

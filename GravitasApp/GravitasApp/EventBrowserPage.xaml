@@ -12,10 +12,10 @@
     <Page.BottomAppBar>
         <CommandBar Background="{StaticResource CommandBarBackgroundBrush}">
             <CommandBar.PrimaryCommands>
-            <AppBarButton Icon="Filter" Label="filters" Click="FilterButton_Click"></AppBarButton>
-            <AppBarButton Icon="Favorite" Label="my shortlist"></AppBarButton>
+                <AppBarButton Icon="Filter" Label="filters" Click="FilterButton_Click"></AppBarButton>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
+                <AppBarButton Label="my shortlist" Click="ShortlistButton_Click"></AppBarButton>
                 <AppBarButton Label="about" Click="AboutButton_Click"></AppBarButton>
             </CommandBar.SecondaryCommands>
         </CommandBar>

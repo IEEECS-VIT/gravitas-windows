@@ -8,7 +8,7 @@ using System.Text;
 
 namespace GravitasSDK.DataModel
 {
-    public class Event
+    public class Event : IEquatable<Event>
     {
 
         #region Private and Internal Properties
@@ -79,6 +79,23 @@ namespace GravitasSDK.DataModel
             AssociatedChapters = new ReadOnlyCollection<string>(_AssociatedChapters);
             Coordinators = new ReadOnlyCollection<Coordinator>(_Coordinators);
             Emails = new ReadOnlyCollection<string>(_Emails);
+        }
+
+        #endregion
+
+        #region Behaviour Methods
+
+        public bool Equals(Event other)
+        {
+            return string.Equals(this.Title, other.Title);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() == typeof(Event))
+                return this.Equals(obj as Event);
+            else
+                return base.Equals(obj);
         }
 
         #endregion

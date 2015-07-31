@@ -18,9 +18,11 @@ namespace GravitasApp.Managers
 
         private const string EVENTS_FILE_NAME = "events.json";
         private const string FILTERS_FILE_NAME = "filters.txt";
+        private const string SHORTLIST_FILE_NAME = "shortlist.txt";
         private const string DATA_VERSION_KEY = "dataVersion";
 
         private static List<Event> _eventList;
+        private static HashSet<Event> _shortlistedEvents;
         private static FilterCriteria<Event> _filterList;
         private static ReadOnlyCollection<Event> _events;
         private static ReadOnlyCollection<IFilter<Event>> _filters;
@@ -181,6 +183,32 @@ namespace GravitasApp.Managers
             return ev;
         }
 
+        public static bool IsShortlisted(Event e)
+        {
+            return _shortlistedEvents.Contains(e);
+        }
+
+        /// <summary>
+        /// Adds or removes an item from the shortlist.
+        /// </summary>
+        /// <param name="e"></param>
+        /// <param name="operation">
+        /// True to add, false to remove.
+        /// </param>
+        /// <returns></returns>
+        public static bool UpdateShortlist(Event e, bool operation)
+        {
+            if (operation == true)
+                return _shortlistedEvents.Add(e);
+            else
+                return _shortlistedEvents.Remove(e);
+        }
+
+        public static List<Event> GetShortlist()
+        {
+            return _shortlistedEvents.ToList();
+        }
+
         public static async Task<StatusCode> TryLoadDataAsync()
         {
             return await MonitoredTask(async () =>
@@ -199,6 +227,20 @@ namespace GravitasApp.Managers
                 catch
                 {
                     FilterList.GenerateChecklist(EventList);
+                }
+
+                try
+                {
+                    StorageFile file = await App._folder.GetFileAsync(SHORTLIST_FILE_NAME);
+                    IList<string> eventNames = await FileIO.ReadLinesAsync(file);
+                    var selectedEvents = EventList.TakeWhile((e) => eventNames.Contains(e.Title));
+                    _shortlistedEvents = new HashSet<Event>();
+                    foreach (Event ev in selectedEvents)
+                        _shortlistedEvents.Add(ev);
+                }
+                catch
+                {
+                    _shortlistedEvents = new HashSet<Event>();
                 }
 
                 return StatusCode.Success;
@@ -237,6 +279,13 @@ namespace GravitasApp.Managers
                         }
                         catch { }
 
+                        // Update shortlisted events
+                        HashSet<Event> newShortlist = new HashSet<Event>();
+                        foreach (Event e in _shortlistedEvents)
+                            if (EventList.Contains(e))
+                                newShortlist.Add(e);
+                        _shortlistedEvents = newShortlist;
+
                         return StatusCode.Success;
                     }
                     else
@@ -246,12 +295,13 @@ namespace GravitasApp.Managers
                 {
                     EventList = new List<Event>();
                     FilterList.GenerateChecklist(EventList);
+                    _shortlistedEvents = new HashSet<Event>();
                     return StatusCode.UnknownError;
                 }
             });
         }
 
-        public static async Task<StatusCode> TrySaveChecklistsAsync()
+        public static async Task<StatusCode> TrySaveDataAsync()
         {
             return await MonitoredTask(async () =>
                 {
@@ -262,6 +312,8 @@ namespace GravitasApp.Managers
                     {
                         StorageFile file = await App._folder.CreateFileAsync(FILTERS_FILE_NAME, CreationCollisionOption.ReplaceExisting);
                         await ContentManager.TrySaveChecklistsAsync(file, FilterList);
+                        StorageFile file2 = await App._folder.CreateFileAsync(SHORTLIST_FILE_NAME, CreationCollisionOption.ReplaceExisting);
+                        await FileIO.WriteLinesAsync(file2, _shortlistedEvents.Select((e) => e.Title).ToList());
                         return StatusCode.Success;
                     }
                     catch
