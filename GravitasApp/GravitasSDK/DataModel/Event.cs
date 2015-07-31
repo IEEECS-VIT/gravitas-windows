@@ -38,6 +38,22 @@ namespace GravitasSDK.DataModel
         public ReadOnlyCollection<Coordinator> Coordinators { get; private set; }
         public ReadOnlyCollection<string> Emails { get; private set; }
 
+        public ulong? PrizeMoney
+        {
+            get
+            {
+                if (PrizesInfo == null || PrizesInfo.Count == 0)
+                    return null;
+                else
+                {
+                    ulong x = 0;
+                    foreach (var item in PrizesInfo)
+                        x += item.Item2;
+                    return x;
+                }
+            }
+        }
+
         #endregion
 
         #region Constructor

@@ -25,7 +25,7 @@
     </Page.Resources>
     
     <Page.BottomAppBar>
-        <CommandBar ClosedDisplayMode="Compact" Background="{StaticResource CommandBarBackgroundBrush}">
+        <CommandBar ClosedDisplayMode="Compact">
             <AppBarButton Icon="Accept" Label="done" Click="AcceptButton_Click"></AppBarButton>
             <AppBarButton Icon="Clear" Label="clear all" Click="ClearButton_Click"></AppBarButton>
         </CommandBar>
@@ -54,7 +54,8 @@
         </Grid>
 
         <ListView ItemsSource="{Binding Source={StaticResource FilterList}}"
-                  Grid.Row="1" Margin="19,0,19,0" SelectionMode="None">
+                  Grid.Row="1" Margin="19,0,19,0" SelectionMode="None"
+                  ScrollViewer.HorizontalScrollMode="Disabled">
 
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">

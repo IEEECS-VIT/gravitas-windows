@@ -106,20 +106,26 @@ namespace GravitasApp.Managers
             FilterList = new FilterCriteria<Event>();
             FilterList.Add(new FilterCriterion<Event, string>((e) => e.Category, "CATEGORY"));
             FilterList.Add(new FilterCriterion<Event, string>((e) =>
+            {
+                if (e.TeamSizes.Count == 0)
+                    return ReplacementContent.TeamSize;
+                else
                 {
-                    if (e.TeamSizes.Count == 0)
-                        return ReplacementContent.TeamSize;
+                    int x;
+                    bool res = int.TryParse(e.TeamSizes[0], out x);
+                    if (res == true)
+                        return x == 1 ? "Individual" : "Group";
                     else
-                    {
-                        int x;
-                        bool res = int.TryParse(e.TeamSizes[0], out x);
-                        if (res == true)
-                            return x == 1 ? "Individual" : "Group";
-                        else
-                            return "Variable options";
-                    }
-
-                }, "TEAM SIZE"));
+                        return "Variable options";
+                }
+            }, "TEAM SIZE"));
+            FilterList.Add(new FilterCriterion<Event, string>((e) =>
+            {
+                if (e.AssociatedChapters.Count == 1)
+                    return e.AssociatedChapters[0];
+                else
+                    return "Multiple chapters";
+            }, "ORGANISED BY"));
 
             CategoryMetadata.Initialize();
         }
@@ -168,6 +174,13 @@ namespace GravitasApp.Managers
             }
         }
 
+        public static Event TryGetEvent(string eventTitle)
+        {
+            // Change to binary search in future.
+            Event ev = _eventList.Find((e) => e.Title == eventTitle);
+            return ev;
+        }
+
         public static async Task<StatusCode> TryLoadDataAsync()
         {
             return await MonitoredTask(async () =>
@@ -180,6 +193,8 @@ namespace GravitasApp.Managers
                 {
                     StorageFile file = await App._folder.GetFileAsync(FILTERS_FILE_NAME);
                     bool res = await ContentManager.TryRestoreChecklistsAsync(file, FilterList);
+                    if (res == false)
+                        FilterList.RunMaintenance(EventList);
                 }
                 catch
                 {

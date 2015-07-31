@@ -1,4 +1,6 @@
-﻿using GravitasApp.Managers;
+﻿using GravitasApp.Helpers;
+using GravitasApp.Managers;
+using GravitasSDK.DataModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,64 +25,15 @@ namespace GravitasApp
 
     public sealed partial class EventPage : Page, IManageable, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        public class ExpandableList<T> : INotifyPropertyChanged
-        {
-            public event PropertyChangedEventHandler PropertyChanged;
-
-            private bool _isExpanded;
-            private string _listHeader;
-            private List<T> _items;
-
-            public bool IsExpanded
-            {
-                get { return _isExpanded; }
-                set
-                {
-                    _isExpanded = value;
-                    if (PropertyChanged != null)
-                        PropertyChanged(this, new PropertyChangedEventArgs("IsExpanded"));
-                }
-            }
-            public List<T> Items
-            {
-                get { return _items; }
-                set
-                {
-                    _items = value;
-                    if (PropertyChanged != null)
-                        PropertyChanged(this, new PropertyChangedEventArgs("Items"));
-                }
-            }
-            public string ListHeader
-            {
-                get { return _listHeader; }
-                set
-                {
-                    _listHeader = value;
-                    if (PropertyChanged != null)
-                        PropertyChanged(this, new PropertyChangedEventArgs("ListHeader"));
-                }
-            }
-
-            public ExpandableList(string listHeader)
-            {
-                _items = new List<T>();
-                _listHeader = listHeader;
-            }
-        }
-
-        public ExpandableList<Visibility> Views { get; set; }
+        public CategoryMetadata CategoryInfo { get; private set; }
+        public Event ContextEvent { get; private set; }
+        public Visibility TeamSizePopupButtonVisibility { get; private set; }
 
         public EventPage()
         {
             this.InitializeComponent();
-
-            Views = new ExpandableList<Visibility>("title");
-            Views.Items.Add(Visibility.Collapsed);
-            Views.Items.Add(Visibility.Collapsed);
-
-            this.DataContext = this;
         }
 
         /// <summary>
@@ -88,10 +41,22 @@ namespace GravitasApp
         /// </summary>
         /// <param name="e">Event data that describes how this page was reached.
         /// This parameter is typically used to configure the page.</param>
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             PageManager.RegisterPage(this);
-            await StatusBar.GetForCurrentView().HideAsync();
+            Event ev = DataManager.TryGetEvent(e.Parameter as string);
+            if (ev == null)
+                return;
+            else
+            {
+                ContextEvent = ev;
+                CategoryInfo = CategoryMetadata.GetMetadata(ev.Category);
+                if (ev.TeamSizes.Count > 1)
+                    TeamSizePopupButtonVisibility = Windows.UI.Xaml.Visibility.Visible;
+                else
+                    TeamSizePopupButtonVisibility = Windows.UI.Xaml.Visibility.Collapsed;
+                    this.DataContext = this;
+            }
         }
 
         public Dictionary<string, object> SaveState()
@@ -108,27 +73,19 @@ namespace GravitasApp
             return true;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            ((sender as FrameworkElement).DataContext as ExpandableList<Visibility>).IsExpanded = !(((sender as FrameworkElement).DataContext as ExpandableList<Visibility>).IsExpanded);
-        }
-
-        private void Button_Click(object sender, TappedRoutedEventArgs e)
-        {
-            ((sender as FrameworkElement).DataContext as ExpandableList<Visibility>).IsExpanded = !(((sender as FrameworkElement).DataContext as ExpandableList<Visibility>).IsExpanded);
-        }
-
         private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
         {
-            teamSizeFlyout.Placement = FlyoutPlacementMode.Bottom;
-            teamSizeFlyout.ShowAt(headerGrid);
+            teamSizeFlyout.ShowAt(sender as FrameworkElement);
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         private void WrapGrid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             (sender as WrapGrid).ItemHeight = (sender as WrapGrid).ItemWidth = e.NewSize.Width / 3;
+        }
+
+        private void ReadMoreButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

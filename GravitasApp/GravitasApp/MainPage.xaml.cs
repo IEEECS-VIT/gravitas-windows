@@ -26,9 +26,8 @@ using GravitasApp.Helpers;
 namespace GravitasApp
 {
 
-    public sealed partial class MainPage : Page, IManageable, INotifyPropertyChanged
+    public sealed partial class MainPage : Page, IManageable
     {
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public IEnumerable<CategoryMetadata> CategoryInfoList
         { get; private set; }
@@ -36,7 +35,9 @@ namespace GravitasApp
         public MainPage()
         {
             this.InitializeComponent();
-            CategoryInfoList = CategoryMetadata.InfoList;
+            CategoryInfoList = CategoryMetadata.InfoList.Take(12);
+
+            this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Required;
             this.DataContext = this;
         }
 
@@ -66,7 +67,7 @@ namespace GravitasApp
 
         private void ViewWorkshopsButton_Click(object sender, RoutedEventArgs e)
         {
-            DataManager.SetFilterToCategory("Workshop");
+            DataManager.SetFilterToCategory("Workshops");
             PageManager.NavigateTo(typeof(EventBrowserPage), null, NavigationType.Default);
         }
 

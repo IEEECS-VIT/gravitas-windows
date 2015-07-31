@@ -167,6 +167,7 @@
     <Content Include="Assets\Gravitas\school.png" />
     <Content Include="Assets\Gravitas\SplashScreen.png" />
     <Content Include="Assets\Gravitas\workshop.png" />
+    <Content Include="Assets\Gravitas\workshops.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

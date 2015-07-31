@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using GravitasApp.Managers;
 using Windows.Storage;
+using Windows.UI.ViewManagement;
 
 
 namespace GravitasApp
@@ -58,6 +59,7 @@ namespace GravitasApp
 #endif
 
             await DataManager.TryLoadDataAsync();
+            await StatusBar.GetForCurrentView().HideAsync();
             Frame rootFrame = Window.Current.Content as Frame;
 
 
@@ -100,7 +102,7 @@ namespace GravitasApp
                 rootFrame.Navigated += this.RootFrame_FirstNavigated;
 
                 // Navigate to the desired page.
-                PageManager.NavigateTo(typeof(IntroPage), null, NavigationType.FreshStart);
+                PageManager.NavigateTo(typeof(MainPage), null, NavigationType.FreshStart);
             }
 
             // Ensure the current window is active

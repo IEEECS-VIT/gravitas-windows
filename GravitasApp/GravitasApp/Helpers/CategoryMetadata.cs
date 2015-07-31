@@ -115,12 +115,16 @@ namespace GravitasApp.Helpers
                 "SCHOOL",
                 "Some mixed bag and classic events to bring back good old days.",
                 Colors.LightSlateGray));
+            _infoList.Add(new CategoryMetadata(
+                "WORKSHOPS",
+                "",
+                Colors.Sienna));
         }
 
         public static CategoryMetadata GetMetadata(string categoryName)
         {
-            if (_infoList.Contains(categoryName))
-                return _infoList[categoryName];
+            if (_infoList.Contains(categoryName.ToUpper()))
+                return _infoList[categoryName.ToUpper()];
             else
                 return null;
         }

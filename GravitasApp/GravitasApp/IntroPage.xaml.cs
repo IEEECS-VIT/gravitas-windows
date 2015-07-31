@@ -125,7 +125,7 @@ namespace GravitasApp
                 else
                     SetButtonState("refreshFail");
 
-                await Task.Delay(300);
+                await Task.Delay(400); // Delay or not?
                 PageManager.NavigateTo(typeof(MainPage), null, NavigationType.FreshStart);
             }
         }
