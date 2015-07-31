@@ -122,6 +122,8 @@
                     <Viewbox Height="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,13,0">
                         <SymbolIcon Symbol="Clock" Margin="0"></SymbolIcon>
                     </Viewbox>
+                    <TextBlock Grid.Column="1" Text="NOT DECIDED" Visibility="{Binding ContextEvent.Timings, Converter={StaticResource ListToVisibilityConverter}}"
+                               Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center"></TextBlock>
                     <ItemsControl Grid.Column="1" ItemsSource="{Binding ContextEvent.Timings}" VerticalAlignment="Center">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>

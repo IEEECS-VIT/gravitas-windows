@@ -16,6 +16,7 @@ namespace GravitasSDK.DataModel
         internal List<Tuple<string, ulong>> _PrizesInfo { get; private set; }
         internal List<string> _FeesInfo { get; private set; }
         internal List<string> _TeamSizes { get; private set; }
+        internal List<string> _Timings { get; private set; }
 
         internal List<string> _AssociatedChapters { get; private set; }
         internal List<Coordinator> _Coordinators { get; private set; }
@@ -33,6 +34,7 @@ namespace GravitasSDK.DataModel
         public ReadOnlyCollection<string> TeamSizes { get; private set; }
         public ReadOnlyCollection<Tuple<string, ulong>> PrizesInfo { get; private set; }
         public ReadOnlyCollection<string> FeesInfo { get; private set; }
+        public ReadOnlyCollection<string> Timings { get; private set; }
 
         public ReadOnlyCollection<string> AssociatedChapters { get; private set; }
         public ReadOnlyCollection<Coordinator> Coordinators { get; private set; }
@@ -63,6 +65,7 @@ namespace GravitasSDK.DataModel
             _TeamSizes = new List<string>();
             _PrizesInfo = new List<Tuple<string, ulong>>();
             _FeesInfo = new List<string>();
+            _Timings = new List<string>();
 
             _AssociatedChapters = new List<string>();
             _Coordinators = new List<Coordinator>();
@@ -71,6 +74,7 @@ namespace GravitasSDK.DataModel
             TeamSizes = new ReadOnlyCollection<string>(_TeamSizes);
             PrizesInfo = new ReadOnlyCollection<Tuple<string, ulong>>(_PrizesInfo);
             FeesInfo = new ReadOnlyCollection<string>(_FeesInfo);
+            Timings = new ReadOnlyCollection<string>(_Timings);
 
             AssociatedChapters = new ReadOnlyCollection<string>(_AssociatedChapters);
             Coordinators = new ReadOnlyCollection<Coordinator>(_Coordinators);

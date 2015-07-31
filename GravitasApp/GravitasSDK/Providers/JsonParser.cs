@@ -55,6 +55,7 @@ namespace GravitasSDK.Providers
                     AssignStringList(eventObject, "emails", e._Emails);
                     AssignStringList(eventObject, "fees", e._FeesInfo);
                     AssignStringList(eventObject, "team_sizes", e._TeamSizes);
+                    AssignStringList(eventObject, "timings", e._Timings);
 
                     if (eventObject.GetNamedValue("coordinators").ValueType != JsonValueType.Null)
                     {
