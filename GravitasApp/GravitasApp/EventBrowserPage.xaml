@@ -53,7 +53,7 @@
         </HyperlinkButton>
         
         <ScrollViewer Grid.Row="3" HorizontalScrollMode="Disabled">
-            <ListView ItemsSource="{Binding SelectedEvents, Mode=OneWay}"
+            <ListView ItemsSource="{Binding SelectedEvents, Mode=OneWay}" x:Name="eventListView"
                       IsItemClickEnabled="True" ItemClick="ListView_ItemClick">
                 <ListView.Resources>
                     <helpers:CategoryToBrushConverter x:Key="CategoryToBrushConverter"></helpers:CategoryToBrushConverter>

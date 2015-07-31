@@ -10,6 +10,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -30,6 +31,7 @@ namespace GravitasApp
         public CategoryMetadata CategoryInfo { get; private set; }
         public Event ContextEvent { get; private set; }
         public Visibility TeamSizePopupButtonVisibility { get; private set; }
+        public List<Uri> ChapterImages { get; private set; }
 
         public EventPage()
         {
@@ -55,7 +57,15 @@ namespace GravitasApp
                     TeamSizePopupButtonVisibility = Windows.UI.Xaml.Visibility.Visible;
                 else
                     TeamSizePopupButtonVisibility = Windows.UI.Xaml.Visibility.Collapsed;
-                    this.DataContext = this;
+
+                ChapterImages = new List<Uri>();
+                foreach (string chapter in ev.AssociatedChapters)
+                {
+                    if (string.Equals(chapter, "individual", StringComparison.OrdinalIgnoreCase) == true)
+                        break;
+                    ChapterImages.Add(new Uri(String.Format("ms-appx:///Assets/ChapterLogos/{0}.png", chapter.Replace(" ", ""))));
+                }
+                this.DataContext = this;
             }
         }
 
@@ -83,9 +93,9 @@ namespace GravitasApp
             (sender as WrapGrid).ItemHeight = (sender as WrapGrid).ItemWidth = e.NewSize.Width / 3;
         }
 
-        private void ReadMoreButton_Click(object sender, RoutedEventArgs e)
+        private async void ReadMoreButton_Click(object sender, RoutedEventArgs e)
         {
-
+            await Launcher.LaunchUriAsync(new Uri(CategoryInfo.WebLink));
         }
     }
 }

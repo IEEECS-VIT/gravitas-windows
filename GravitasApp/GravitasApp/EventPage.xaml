@@ -151,7 +151,7 @@
                 <ItemsControl ItemsSource="{Binding ContextEvent.FeesInfo}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding}" Style="{StaticResource TitleTextBlockStyle}" Margin="0,0,0,2"></TextBlock>
+                            <TextBlock Text="{Binding}" Style="{StaticResource BodyTextBlockStyle}" Margin="0,0,0,2"></TextBlock>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -165,29 +165,31 @@
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,2">
                                 <TextBlock Text="{Binding Item1}" Margin="0,0,7,0" Style="{StaticResource BodyTextBlockStyle}"></TextBlock>
                                 <TextBlock Text="-" Margin="0,0,7,0" Style="{StaticResource BodyTextBlockStyle}" Foreground="{ThemeResource PhoneMidBrush}"></TextBlock>
-                                <TextBlock Text="{Binding Item2}" Style="{StaticResource TitleTextBlockStyle}" Grid.Column="1"></TextBlock>
+                                <TextBlock Text="{Binding Item2}" Style="{StaticResource BodyTextBlockStyle}" Grid.Column="1"></TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 
-                <ListView ItemsSource="{Binding ContextEvent.AssociatedChapters}">
-                    <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapGrid Orientation="Horizontal" MaximumRowsOrColumns="3" SizeChanged="WrapGrid_SizeChanged"
-                                      HorizontalChildrenAlignment="Stretch" VerticalChildrenAlignment="Stretch"/>
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                            <Viewbox Margin="30" Stretch="UniformToFill"
-                                     Child="{Binding}"></Viewbox>
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-
+                <TextBlock Text="organized by" Margin="0,30,0,10" Style="{StaticResource GroupHeaderTextBlockStyle}"></TextBlock>
+                <TextBlock Text="Individual Event" Style="{StaticResource BodyTextBlockStyle}"
+                           Visibility="{Binding ChapterImages, Converter={StaticResource ListToVisibilityConverter}}" Margin="0,0,0,13"></TextBlock>
+                <ListView ItemsSource="{Binding ChapterImages}" ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Disabled" Margin="0,0,0,20">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapGrid Orientation="Horizontal" MaximumRowsOrColumns="3" SizeChanged="WrapGrid_SizeChanged"
+                                          HorizontalChildrenAlignment="Stretch" VerticalChildrenAlignment="Stretch"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Background="White" Margin="8">
+                                    <Image Stretch="UniformToFill" Margin="-25" Source="{Binding}"></Image>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                
             </StackPanel>
         </ScrollViewer>
 

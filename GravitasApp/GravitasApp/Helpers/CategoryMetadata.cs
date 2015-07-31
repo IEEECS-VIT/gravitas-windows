@@ -15,6 +15,7 @@ namespace GravitasApp.Helpers
     {
         private readonly string _name;
         private readonly string _info;
+        private readonly string _linkFragment;
 
         #region Public Properties
 
@@ -25,6 +26,10 @@ namespace GravitasApp.Helpers
         public string Info
         {
             get { return _info; }
+        }
+        public string WebLink
+        {
+            get { return "http://info.vit.ac.in/gravitas2015/events/list/list.html#" + _linkFragment; }
         }
         public Uri ImageUri
         {
@@ -37,11 +42,11 @@ namespace GravitasApp.Helpers
 
         #endregion
 
-        private CategoryMetadata(string name, string info, Color labelColor)
+        private CategoryMetadata(string name, string info, Color labelColor, string linkFragment)
         {
             _name = name;
             _info = info;
-
+            _linkFragment = linkFragment;
             _categoryBrushes.Add(name, new SolidColorBrush(labelColor));
         }
     }
@@ -70,55 +75,55 @@ namespace GravitasApp.Helpers
             _infoList.Add(new CategoryMetadata(
                 "PREMIUM",
                 "Go big. Participate in these massively popular events and take a shot at beating the crowd!",
-                Colors.DarkSalmon));
+                Colors.DarkSalmon, "premium"));
             _infoList.Add(new CategoryMetadata(
                 "ROBOMANIA",
                 "Robots are always fascinating! Make them run, fly, fight, anything and have the world watch in awe.",
-                Colors.LightGray));
+                Colors.LightGray, "robotics"));
             _infoList.Add(new CategoryMetadata(
                 "BITS AND BYTES",
                 "Geek is the new cool! Compete across various domains covering algorithms, networking and more.",
-                Colors.LightBlue));
+                Colors.LightBlue, "computer"));
             _infoList.Add(new CategoryMetadata(
                 "APPLIED ENGINEERING",
                 "Apply everything you've learnt in engineering (no, we're serious) and compete to the teeth.",
-                Colors.Goldenrod));
+                Colors.Goldenrod, "mech"));
             _infoList.Add(new CategoryMetadata(
                 "MANAGEMENT",
                 "Management isn't for the faint hearted. Showcase your leadership and managing skills in these set of events.",
-                Colors.Bisque));
+                Colors.Bisque, "manage"));
             _infoList.Add(new CategoryMetadata(
                 "INFORMALS",
                 "Put down your books, have some fun and forget engineering!",
-                Colors.MediumPurple));
+                Colors.MediumPurple, "informal"));
             _infoList.Add(new CategoryMetadata(
                 "BUILTRIX",
                 "Build, plan or construct - this is your platform to show your creativity and skill.",
-                Colors.CornflowerBlue));
+                Colors.CornflowerBlue, "civil"));
             _infoList.Add(new CategoryMetadata(
                 "CIRCUITRIX",
                 "Let go of your resistance and charge up with these electrifying events!",
-                Colors.MediumSeaGreen));
+                Colors.MediumSeaGreen, "electric"));
             _infoList.Add(new CategoryMetadata(
                 "QUIZ",
                 "Set your hands on the buzzer, its quiz time!",
-                new Color() { R = 200, G = 50, B = 50, A = 255 }));
+                new Color() { R = 200, G = 50, B = 50, A = 255 }, "quiz"));
             _infoList.Add(new CategoryMetadata(
                 "ONLINE",
                 "With internet being the world's obsession, take part now in a variety of online events.",
-                Colors.Tomato));
+                Colors.Tomato, "online"));
             _infoList.Add(new CategoryMetadata(
                 "BIOXYN",
                 "Its the survival of the fittest, time to put those little neurons to use!",
-                Colors.Green));
+                Colors.Green, "bio"));
             _infoList.Add(new CategoryMetadata(
                 "SCHOOL",
                 "Some mixed bag and classic events to bring back good old days.",
-                Colors.LightSlateGray));
+                Colors.LightSlateGray, "school"));
             _infoList.Add(new CategoryMetadata(
                 "WORKSHOPS",
                 "",
-                Colors.Sienna));
+                Colors.Sienna, "workshops"));
         }
 
         public static CategoryMetadata GetMetadata(string categoryName)
