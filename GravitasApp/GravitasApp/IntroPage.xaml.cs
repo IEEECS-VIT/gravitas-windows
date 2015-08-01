@@ -22,7 +22,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace GravitasApp
 {
-    
+
     public sealed partial class IntroPage : Page, IManageable, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -60,9 +60,9 @@ namespace GravitasApp
 
             _quotes = new List<Tuple<string, string>>()
             {
-                new Tuple<string,string>("A designer is an emerging synthesis of artist, inventor, mechanic, objective economist and evolutio­nary strategist.",  "BUCKMINSTER FULLER"),
-                new Tuple<string,string>("It almost goes without saying that when you are a startup, one of the first things you do is you start setting aside money to defend yourself from patent lawsuits, because any successful company, even moderately successful, is going to get hit by a patent lawsuit from someone who's just trying to look for a payout.","CHARLES DUHIGG"),
-                new Tuple<string,string>("Emile Berliner, a German immigrant working in Washington D.C., patented a successful system of sound recording. This system brought huge revolution in the field of music and recorders which we cherish."," FACTS"),
+                new Tuple<string,string>("A designer is an emerging synthesis of artist, inventor, mechanic, objective economist and evolutio­nary strategist.", "BUCKMINSTER FULLER"),
+                new Tuple<string,string>("It almost goes without saying that when you are a startup, one of the first things you do is you start setting aside money to defend yourself from patent lawsuits, because any successful company, even moderately successful, is going to get hit by a patent lawsuit from someone who's just trying to look for a payout.", "CHARLES DUHIGG"),
+                new Tuple<string,string>("Emile Berliner, a German immigrant working in Washington D.C., patented a successful system of sound recording. This system brought huge revolution in the field of music and recorders which we cherish.", "#FACT"),
             };
             DisplayQuote = _quotes[0];
 
@@ -143,7 +143,7 @@ namespace GravitasApp
             {
                 SetButtonState("progress");
                 StatusCode code = await DataManager.RefreshEventsAsync();
-                if (code == StatusCode.Success)
+                if (code == StatusCode.Success && DataManager.ContentReady == true)
                     SetButtonState("complete");
                 else
                 {

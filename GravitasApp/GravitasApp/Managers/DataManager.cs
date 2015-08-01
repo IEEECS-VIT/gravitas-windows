@@ -27,7 +27,7 @@ namespace GravitasApp.Managers
         private static ReadOnlyCollection<Event> _events;
         private static ReadOnlyCollection<IFilter<Event>> _filters;
         private static bool _isBusy;
-        private static bool _contentReady;
+        private static bool _contentReady = false;
 
         private static List<Event> EventList
         {
@@ -35,12 +35,8 @@ namespace GravitasApp.Managers
             set
             {
                 _eventList = value;
-
-                if (_eventList != null && _eventList.Count != 0)
-                {
-                    _contentReady = true;
+                if (_eventList != null)
                     _events = new ReadOnlyCollection<Event>(_eventList);
-                }
                 else
                     _events = null;
             }
@@ -129,6 +125,7 @@ namespace GravitasApp.Managers
                     return "Multiple chapters";
             }, "ORGANISED BY"));
 
+            _shortlistedEvents = new HashSet<Event>();
             CategoryMetadata.Initialize();
         }
 
@@ -214,7 +211,10 @@ namespace GravitasApp.Managers
             {
                 StatusCode status = await TryLoadEventsFromCache();
                 if (status != StatusCode.Success)
+                {
+                    EventsDataVersion = "xxx";
                     return StatusCode.NoData;
+                }
 
                 try
                 {
@@ -231,8 +231,8 @@ namespace GravitasApp.Managers
                 try
                 {
                     StorageFile file = await App._folder.GetFileAsync(SHORTLIST_FILE_NAME);
-                    IList<string> eventNames = await FileIO.ReadLinesAsync(file);
-                    var selectedEvents = EventList.TakeWhile((e) => eventNames.Contains(e.Title));
+                    IList<string> eventNames = (await FileIO.ReadLinesAsync(file));
+                    List<Event> selectedEvents =  EventList.FindAll((e) => eventNames.Contains(e.Title));
                     _shortlistedEvents = new HashSet<Event>();
                     foreach (Event ev in selectedEvents)
                         _shortlistedEvents.Add(ev);
@@ -242,6 +242,7 @@ namespace GravitasApp.Managers
                     _shortlistedEvents = new HashSet<Event>();
                 }
 
+                _contentReady = true;
                 return StatusCode.Success;
             });
         }
@@ -265,7 +266,9 @@ namespace GravitasApp.Managers
                         try
                         {
                             StorageFile file = await App._folder.CreateFileAsync(FILTERS_FILE_NAME, CreationCollisionOption.ReplaceExisting);
-                            await ContentManager.TrySaveChecklistsAsync(file, FilterList);
+                            bool res = await ContentManager.TrySaveChecklistsAsync(file, FilterList);
+                            if (res == false)
+                                await file.DeleteAsync();
                         }
                         catch
                         { }
@@ -285,6 +288,7 @@ namespace GravitasApp.Managers
                                 newShortlist.Add(e);
                         _shortlistedEvents = newShortlist;
 
+                        _contentReady = true;
                         return StatusCode.Success;
                     }
                     else
@@ -294,7 +298,6 @@ namespace GravitasApp.Managers
                 {
                     EventList = new List<Event>();
                     FilterList.GenerateChecklist(EventList);
-                    _shortlistedEvents = new HashSet<Event>();
                     return StatusCode.UnknownError;
                 }
             });

@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.BottomAppBar>
-        <CommandBar Background="{StaticResource CommandBarBackgroundBrush}">
+        <CommandBar>
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Home" Label="home page" Click="HomePageButton_Click"></AppBarButton>
             </CommandBar.PrimaryCommands>

@@ -99,7 +99,7 @@
         
         <ScrollViewer>
             <StackPanel Margin="19,19,19,0">
-                <TextBlock Text="{Binding ContextEvent.Title}" Style="{StaticResource MessageDialogTitleStyle}" FontSize="27" MaxLines="0" TextWrapping="WrapWholeWords"
+                <TextBlock Text="{Binding ContextEvent.Title}" Style="{StaticResource MessageDialogTitleStyle}" FontSize="29" MaxLines="0" TextWrapping="WrapWholeWords"
                            ContinuumNavigationTransitionInfo.IsEntranceElement="True"></TextBlock>
                 <TextBlock Text="{Binding CategoryInfo.Name}" Style="{StaticResource TitleTextBlockStyle}" Foreground="{Binding CategoryInfo.LabelBrush}" Margin="0,3,0,0"></TextBlock>
 
@@ -140,7 +140,7 @@
                     </Grid>
                 </Grid>
 
-                <TextBlock Style="{StaticResource BodyTextBlockStyle}" MaxLines="5" TextTrimming="WordEllipsis"
+                <TextBlock Style="{StaticResource BodyTextBlockStyle}" MaxLines="5" TextTrimming="WordEllipsis" TextWrapping="WrapWholeWords"
                            Margin="0,40,0,0" Text="{Binding ContextEvent.Description, TargetNullValue='No description available.'}">
                 </TextBlock>
                 <HyperlinkButton Click="ReadMoreButton_Click">

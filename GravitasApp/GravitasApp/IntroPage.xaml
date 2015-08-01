@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Viewbox Height="50" Margin="0,0,0,0">
+            <Viewbox Height="57" Margin="0,0,0,0">
                 <Image Source="ms-appx:///Assets/Gravitas/GravitasTitle.png" Stretch="UniformToFill"></Image>
             </Viewbox>
         </StackPanel>

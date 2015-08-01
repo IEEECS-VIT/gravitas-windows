@@ -62,6 +62,9 @@ namespace GravitasSDK.Providers
             try
             {
                 IList<string> xmlStrings = await FileIO.ReadLinesAsync(inputFile);
+                if (xmlStrings.Count == 0)
+                    return false;
+
                 for (int i = 0; i < filterCriteria.Count; i++)
                 {
                     dynamic filter = filterCriteria[i];
