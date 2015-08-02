@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="d8106dd5-62f9-4703-b1c5-66f9d34abf1d" Publisher="CN=Vinay" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="d8106dd5-62f9-4703-b1c5-66f9d34abf1d" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="21894BioCrossX.VITgraVITas" Publisher="CN=580FDDE8-74DE-42D5-ABBC-3ADB6C33708D" Version="1.1.0.0" />
+  <mp:PhoneIdentity PhoneProductId="8a474fc0-6bbe-4d9c-8e03-ed0e3bbe5dac" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>GravitasApp</DisplayName>
-    <PublisherDisplayName>Vinay</PublisherDisplayName>
+    <DisplayName>VIT graVITas</DisplayName>
+    <PublisherDisplayName>VinayGupta</PublisherDisplayName>
     <Logo>Assets\AppLogos\StoreLogo.png</Logo>
   </Properties>
   <Prerequisites>
@@ -16,7 +16,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="GravitasApp.App">
-      <m3:VisualElements DisplayName="GravitasApp" Square150x150Logo="Assets\AppLogos\Logo.png" Square44x44Logo="Assets\AppLogos\SmallLogo.png" Description="GravitasApp" ForegroundText="light" BackgroundColor="transparent">
+      <m3:VisualElements DisplayName="VIT graVITas" Square150x150Logo="Assets\AppLogos\Logo.png" Square44x44Logo="Assets\AppLogos\SmallLogo.png" Description="GravitasApp" ForegroundText="light" BackgroundColor="transparent">
         <m3:DefaultTile Wide310x150Logo="Assets\AppLogos\WideLogo.png" Square71x71Logo="Assets\AppLogos\Square71x71Logo.png">
         </m3:DefaultTile>
         <m3:SplashScreen Image="Assets\AppLogos\SplashScreen.png" />
