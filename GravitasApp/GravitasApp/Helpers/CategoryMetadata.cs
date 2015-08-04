@@ -105,7 +105,7 @@ namespace GravitasApp.Helpers
                 "Let go of your resistance and charge up with these electrifying events!",
                 Colors.MediumSeaGreen, "electric"));
             _infoList.Add(new CategoryMetadata(
-                "QUIZ",
+                "GRAVITAS QUIZ SERIES",
                 "Set your hands on the buzzer, its quiz time!",
                 new Color() { R = 200, G = 50, B = 50, A = 255 }, "quiz"));
             _infoList.Add(new CategoryMetadata(
