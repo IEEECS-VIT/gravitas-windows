@@ -257,6 +257,8 @@ namespace GravitasApp.Managers
                     if (response.Code == StatusCode.Success)
                     {
                         var details = JsonParser.TryGetEvents(response.Content);
+                        if (details == null)
+                            return StatusCode.UnknownError;
 
                         // Locally set data variables
                         EventList = details.Item2;
@@ -296,6 +298,7 @@ namespace GravitasApp.Managers
                 }
                 catch
                 {
+                    _contentReady = false;
                     EventList = new List<Event>();
                     FilterList.GenerateChecklist(EventList);
                     return StatusCode.UnknownError;

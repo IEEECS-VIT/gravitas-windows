@@ -77,6 +77,10 @@
                 </PickerFlyout.Content>
             </PickerFlyout>
             
+            <Style x:Key="LabelTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource GroupHeaderTextBlockStyle}">
+                <Setter Property="Margin" Value="0,30,0,7"></Setter>
+            </Style>
+            
         </ResourceDictionary>
     </Page.Resources>
 
@@ -141,52 +145,43 @@
                     </Grid>
                 </Grid>
 
-                <TextBlock Style="{StaticResource BodyTextBlockStyle}" MaxLines="5" TextTrimming="WordEllipsis" TextWrapping="WrapWholeWords"
+                <TextBlock Style="{StaticResource BodyTextBlockStyle}" MaxLines="0" TextWrapping="WrapWholeWords"
                            Margin="0,40,0,0" Text="{Binding ContextEvent.Description, TargetNullValue='No description available.'}">
                 </TextBlock>
+                <!--
                 <HyperlinkButton Click="ReadMoreButton_Click">
                     <TextBlock Text="read more online" Foreground="{ThemeResource PhoneAccentBrush}"
                                FontSize="{Binding ElementName=titleTextBlock, Path=FontSize}" FontWeight="SemiBold"></TextBlock>
                 </HyperlinkButton>
+                -->
 
-                <Grid Margin="0,30,0,0" Visibility="Visible">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Viewbox Height="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,13,0">
-                        <SymbolIcon Symbol="Clock" Margin="0"></SymbolIcon>
-                    </Viewbox>
-                    <TextBlock Grid.Column="1" Text="NOT DECIDED" Visibility="{Binding ContextEvent.Timings, Converter={StaticResource ListToVisibilityConverter}}"
-                               Style="{StaticResource TitleTextBlockStyle}" VerticalAlignment="Center"></TextBlock>
-                    <ItemsControl Grid.Column="1" ItemsSource="{Binding ContextEvent.Timings}" VerticalAlignment="Center">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding}" Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </Grid>
+                <TextBlock Text="schedule" Style="{StaticResource LabelTextBlockStyle}"></TextBlock>
+                <TextBlock Text="To be announced" Style="{StaticResource BodyTextBlockStyle}"
+                           Visibility="{Binding ContextEvent.Schedules, Converter={StaticResource ListToVisibilityConverter}}"></TextBlock>
+                <ItemsControl Grid.Column="1" ItemsSource="{Binding ContextEvent.Schedules}" VerticalAlignment="Center">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,5,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Border Width="50" Height="50" CornerRadius="3" Background="{ThemeResource PhoneChromeBrush}">
+                                    <Viewbox Margin="5">
+                                        <SymbolIcon Symbol="Clock" Foreground="{ThemeResource PhoneAccentBrush}"></SymbolIcon>
+                                    </Viewbox>
+                                </Border>
+                                <StackPanel Margin="10,0,0,0" Grid.Column="1">
+                                    <TextBlock Text="{Binding Timings}" Style="{StaticResource BodyTextBlockStyle}"></TextBlock>
+                                    <TextBlock Text="{Binding Venue}" Style="{StaticResource ControlContextualInfoTextBlockStyle}" Foreground="{ThemeResource PhoneMidBrush}"></TextBlock>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
                 
-                <Grid Margin="0,17,0,0" Visibility="Visible">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Viewbox Height="50" HorizontalAlignment="Left" Margin="0,0,13,0">
-                        <SymbolIcon Symbol="Map" Margin="0"></SymbolIcon>
-                    </Viewbox>
-                    <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,10,0">
-                        <TextBlock Text="VENUE" VerticalAlignment="Center" TextAlignment="Left" Grid.Column="0" Style="{StaticResource ControlHeaderTextBlockStyle}"></TextBlock>
-                        <TextBlock Text="{Binding ContextEvent.Venue, TargetNullValue='NOT DECIDED'}" TextAlignment="Left" HorizontalAlignment="Left" Style="{StaticResource TitleTextBlockStyle}"></TextBlock>
-                    </StackPanel>
-                </Grid>
-                
-                <TextBlock Text="registration fees" Margin="0,30,0,7" Style="{StaticResource GroupHeaderTextBlockStyle}"></TextBlock>
-                <TextBlock Text="NOT MENTIONED" Style="{StaticResource BodyTextBlockStyle}"
+                <TextBlock Text="registration fees" Style="{StaticResource LabelTextBlockStyle}"></TextBlock>
+                <TextBlock Text="Not yet confirmed" Style="{StaticResource BodyTextBlockStyle}"
                            Visibility="{Binding ContextEvent.FeesInfo, Converter={StaticResource ListToVisibilityConverter}}"></TextBlock>
                 <ItemsControl ItemsSource="{Binding ContextEvent.FeesInfo}">
                     <ItemsControl.ItemTemplate>
@@ -196,8 +191,8 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
 
-                <TextBlock Text="prizes" Margin="0,30,0,7" Style="{StaticResource GroupHeaderTextBlockStyle}"></TextBlock>
-                <TextBlock Text="NONE" Style="{StaticResource BodyTextBlockStyle}"
+                <TextBlock Text="prizes" Style="{StaticResource LabelTextBlockStyle}"></TextBlock>
+                <TextBlock Text="None" Style="{StaticResource BodyTextBlockStyle}"
                            Visibility="{Binding ContextEvent.PrizesInfo, Converter={StaticResource ListToVisibilityConverter}}"></TextBlock>
                 <ItemsControl ItemsSource="{Binding ContextEvent.PrizesInfo}">
                     <ItemsControl.ItemTemplate>
@@ -211,10 +206,10 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 
-                <TextBlock Text="organized by" Margin="0,30,0,10" Style="{StaticResource GroupHeaderTextBlockStyle}"></TextBlock>
+                <TextBlock Text="organized by" Style="{StaticResource LabelTextBlockStyle}"></TextBlock>
                 <TextBlock Text="Individual Event" Style="{StaticResource BodyTextBlockStyle}"
-                           Visibility="{Binding ChapterImages, Converter={StaticResource ListToVisibilityConverter}}" Margin="0,0,0,13"></TextBlock>
-                <ListView ItemsSource="{Binding ChapterImages}" ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Disabled" Margin="0,0,0,20">
+                           Visibility="{Binding ChapterImages, Converter={StaticResource ListToVisibilityConverter}}" Margin="0,3,0,13"></TextBlock>
+                <ListView ItemsSource="{Binding ChapterImages}" ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Disabled" Margin="0,3,0,20">
                         <ListView.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapGrid Orientation="Horizontal" MaximumRowsOrColumns="3" SizeChanged="WrapGrid_SizeChanged"

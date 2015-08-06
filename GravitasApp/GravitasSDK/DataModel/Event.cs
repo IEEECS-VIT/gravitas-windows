@@ -97,6 +97,11 @@ namespace GravitasSDK.DataModel
                 return base.Equals(obj);
         }
 
+        public override int GetHashCode()
+        {
+            return Title.GetHashCode();
+        }
+
         #endregion
     }
 
@@ -117,15 +122,20 @@ namespace GravitasSDK.DataModel
         }
     }
 
-    public struct Schedule
+    public class Schedule
     {
-        public string Timings { get; private set; }
-        public string Venue { get; private set; }
+        private readonly string _timings;
+        private readonly string _venue;
+
+        public string Timings
+        { get { return _timings; } }
+        public string Venue
+        { get { return _venue; } }
 
         public Schedule(string timings, string venue)
         {
-            Timings = timings;
-            Venue = venue;
+            _timings = timings;
+            _venue = venue;
         }
     }
 }

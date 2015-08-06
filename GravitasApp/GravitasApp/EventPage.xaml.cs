@@ -95,10 +95,12 @@ namespace GravitasApp
             (sender as WrapGrid).ItemHeight = (sender as WrapGrid).ItemWidth = e.NewSize.Width / 3;
         }
 
+        /*
         private async void ReadMoreButton_Click(object sender, RoutedEventArgs e)
         {
             await Launcher.LaunchUriAsync(new Uri(CategoryInfo.WebLink));
         }
+        */
 
         private async void ContactButton_Click(object sender, RoutedEventArgs e)
         {
