@@ -16,7 +16,7 @@ namespace GravitasSDK.DataModel
         internal List<Tuple<string, ulong>> _PrizesInfo { get; private set; }
         internal List<string> _FeesInfo { get; private set; }
         internal List<string> _TeamSizes { get; private set; }
-        internal List<string> _Timings { get; private set; }
+        internal List<Schedule> _Schedules { get; private set; }
 
         internal List<string> _AssociatedChapters { get; private set; }
         internal List<Coordinator> _Coordinators { get; private set; }
@@ -29,12 +29,11 @@ namespace GravitasSDK.DataModel
         public string Title { get; internal set; }
         public string Category { get; internal set; }
         public string Description { get; internal set; }
-        public string Venue { get; internal set; }
 
         public ReadOnlyCollection<string> TeamSizes { get; private set; }
         public ReadOnlyCollection<Tuple<string, ulong>> PrizesInfo { get; private set; }
         public ReadOnlyCollection<string> FeesInfo { get; private set; }
-        public ReadOnlyCollection<string> Timings { get; private set; }
+        public ReadOnlyCollection<Schedule> Schedules { get; private set; }
 
         public ReadOnlyCollection<string> AssociatedChapters { get; private set; }
         public ReadOnlyCollection<Coordinator> Coordinators { get; private set; }
@@ -65,7 +64,7 @@ namespace GravitasSDK.DataModel
             _TeamSizes = new List<string>();
             _PrizesInfo = new List<Tuple<string, ulong>>();
             _FeesInfo = new List<string>();
-            _Timings = new List<string>();
+            _Schedules = new List<Schedule>();
 
             _AssociatedChapters = new List<string>();
             _Coordinators = new List<Coordinator>();
@@ -74,7 +73,7 @@ namespace GravitasSDK.DataModel
             TeamSizes = new ReadOnlyCollection<string>(_TeamSizes);
             PrizesInfo = new ReadOnlyCollection<Tuple<string, ulong>>(_PrizesInfo);
             FeesInfo = new ReadOnlyCollection<string>(_FeesInfo);
-            Timings = new ReadOnlyCollection<string>(_Timings);
+            Schedules = new ReadOnlyCollection<Schedule>(_Schedules);
 
             AssociatedChapters = new ReadOnlyCollection<string>(_AssociatedChapters);
             Coordinators = new ReadOnlyCollection<Coordinator>(_Coordinators);
@@ -115,6 +114,18 @@ namespace GravitasSDK.DataModel
         {
             _name = name;
             _phone = phone;
+        }
+    }
+
+    public struct Schedule
+    {
+        public string Timings { get; private set; }
+        public string Venue { get; private set; }
+
+        public Schedule(string timings, string venue)
+        {
+            Timings = timings;
+            Venue = venue;
         }
     }
 }

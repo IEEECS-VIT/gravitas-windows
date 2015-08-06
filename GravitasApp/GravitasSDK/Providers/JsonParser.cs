@@ -55,7 +55,15 @@ namespace GravitasSDK.Providers
                     AssignStringList(eventObject, "emails", e._Emails);
                     AssignStringList(eventObject, "fees", e._FeesInfo);
                     AssignStringList(eventObject, "team_sizes", e._TeamSizes);
-                    AssignStringList(eventObject, "timings", e._Timings);
+
+                    if (eventObject.GetNamedValue("schedules").ValueType != JsonValueType.Null)
+                    {
+                        foreach (JsonValue val in eventObject.GetNamedArray("schedules"))
+                        {
+                            JsonObject cObj = val.GetObject();
+                            e._Schedules.Add(new Schedule(cObj.GetNamedString("timings"), cObj.GetNamedString("venue")));
+                        }
+                    }
 
                     if (eventObject.GetNamedValue("coordinators").ValueType != JsonValueType.Null)
                     {
@@ -74,11 +82,6 @@ namespace GravitasSDK.Providers
                             e._PrizesInfo.Add(new Tuple<string, ulong>(cObj.GetNamedString("tag"), (ulong)(cObj.GetNamedNumber("prize"))));
                         }
                     }
-
-                    if (eventObject.GetNamedValue("venue").ValueType != JsonValueType.Null)
-                        e.Venue = eventObject.GetNamedString("venue");
-
-                    // Timings/Dates are pending
 
                     events.Add(e);
                 }
