@@ -155,7 +155,9 @@
     <Content Include="Assets\ChapterLogos\isa.png" />
     <Content Include="Assets\ChapterLogos\isoi.png" />
     <Content Include="Assets\ChapterLogos\iste.png" />
+    <Content Include="Assets\ChapterLogos\kairossociety.png" />
     <Content Include="Assets\ChapterLogos\natureclub.png" />
+    <Content Include="Assets\ChapterLogos\photographyclub.png" />
     <Content Include="Assets\ChapterLogos\robovitics.png" />
     <Content Include="Assets\ChapterLogos\sabest.png" />
     <Content Include="Assets\ChapterLogos\sae.png" />
