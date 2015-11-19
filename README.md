@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/IEEECS-VIT/gravitas-windows.png?label=ready&title=Ready)](https://waffle.io/IEEECS-VIT/gravitas-windows)
 # gravitas-windows
 The official Windows phone application for graVITas 2015.
 
