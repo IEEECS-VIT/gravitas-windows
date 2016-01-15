@@ -124,7 +124,7 @@
         		</Setter>
         	</Style>
         
-            <x:Double x:Key="PageHeaderFontSize">37</x:Double>
+            <x:Double x:Key="PageHeaderFontSize">42</x:Double>
             <Style x:Key="PageHeaderTextBlockStyle" TargetType="TextBlock"
                    BasedOn="{StaticResource SubheaderTextBlockStyle}">
                 <Setter Property="FontSize" Value="{StaticResource PageHeaderFontSize}"></Setter>
